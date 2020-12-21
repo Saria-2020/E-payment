@@ -1,0 +1,43 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.fu.epayment",
+      "nativeLanguage": "en"
+    },
+    "jhipsterVersion": "6.10.4",
+    "applicationType": "monolith",
+    "baseName": "EPayment",
+    "packageName": "com.fu.epayment",
+    "packageFolder": "com/fu/epayment",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "Yjk4YmU3MWRlOWU2ZWU0YjVjNmZkZTdhMjgyMzQ0MjM0MmFmMTE5MzU0NWE1ZTk0YTkzNmJiYTE4YzFmOTY0MmU5ZWRjM2JmOTBlYmZlYzMwYWE0ZjM5OWQ3MGRkNjMzMDhjNGRlZGQzYWQ0YjVlYWI3YTk4OWViMTA4M2ZmZjQ=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "lux",
+    "clientThemeVariant": "dark",
+    "creationTimestamp": 1606168057417,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": true,
+    "nativeLanguage": "en",
+    "languages": ["en", "ar-ly"],
+    "blueprints": []
+  }
+}

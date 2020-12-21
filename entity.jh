@@ -1,0 +1,71 @@
+
+
+
+entity Customer {
+  phoneNumber String,
+}
+
+
+entity Invoice {
+ date ZonedDateTime
+ uniqueNumberCustomer UUID,
+ nameOfTheCardOwner String,
+ cardExpirationDate String,
+ verificationNumber String,
+ transactionNumber String,
+ invoiceNumber String, 
+ unitName String,
+ customerName String, 
+ amountOfTheInvoice String,
+ amountPaid String
+}
+
+entity GeographicalData {
+ state String,
+ units String,
+ district String,
+ square String,
+ realEstateNumber String,
+ activityNumber String,
+ areaOfTheRealEstate String
+ }
+ 
+ entity ActivityInformation {
+ name String,
+ sector String,
+ typeOfActivity String,
+ propertyType String,
+ areaClass String,
+ architectureType String,
+ numberOfFloors String,
+ features String,
+ descriptionOfTheFeatures TextBlob
+ }
+ 
+ entity Category {
+ 	name String
+    descrpition TextBlob
+ }
+ 
+ entity Card{
+ 	number String,
+    name String,
+    expDate String,
+ }
+ 
+
+relationship OneToOne {
+	Customer{user(login)} to User
+    ActivityInformation{category(name)} to Category
+    Invoice{card(number)} to Card
+}
+
+relationship OneToMany {
+	Customer{invoice(uniqueNumberCustomer)} to Invoice
+    Customer to ActivityInformation
+    Customer to GeographicalData
+    Customer{card(number)} to Card{customer(phoneNumber)}
+}
+
+paginate * with pagination
+service * with serviceImpl
