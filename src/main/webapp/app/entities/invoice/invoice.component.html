@@ -1,0 +1,103 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="ePaymentApp.invoice.home.title">Invoices</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-invoice" [routerLink]="['/invoice/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="ePaymentApp.invoice.home.createLabel">
+            Create a new Invoice
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="invoices?.length === 0">
+        <span jhiTranslate="ePaymentApp.invoice.home.notFound">No invoices found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="invoices && invoices.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="date"><span jhiTranslate="ePaymentApp.invoice.date">Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="uniqueNumberCustomer"><span jhiTranslate="ePaymentApp.invoice.uniqueNumberCustomer">Unique Number Customer</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="nameOfTheCardOwner"><span jhiTranslate="ePaymentApp.invoice.nameOfTheCardOwner">Name Of The Card Owner</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="cardExpirationDate"><span jhiTranslate="ePaymentApp.invoice.cardExpirationDate">Card Expiration Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="verificationNumber"><span jhiTranslate="ePaymentApp.invoice.verificationNumber">Verification Number</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="transactionNumber"><span jhiTranslate="ePaymentApp.invoice.transactionNumber">Transaction Number</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="invoiceNumber"><span jhiTranslate="ePaymentApp.invoice.invoiceNumber">Invoice Number</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="unitName"><span jhiTranslate="ePaymentApp.invoice.unitName">Unit Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="customerName"><span jhiTranslate="ePaymentApp.invoice.customerName">Customer Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="amountOfTheInvoice"><span jhiTranslate="ePaymentApp.invoice.amountOfTheInvoice">Amount Of The Invoice</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="amountPaid"><span jhiTranslate="ePaymentApp.invoice.amountPaid">Amount Paid</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="card.number"><span jhiTranslate="ePaymentApp.invoice.card">Card</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="customer.id"><span jhiTranslate="ePaymentApp.invoice.customer">Customer</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let invoice of invoices ;trackBy: trackId">
+                    <td><a [routerLink]="['/invoice', invoice.id, 'view']">{{ invoice.id }}</a></td>
+                    <td>{{ invoice.date | date:'medium' }}</td>
+                    <td>{{ invoice.uniqueNumberCustomer }}</td>
+                    <td>{{ invoice.nameOfTheCardOwner }}</td>
+                    <td>{{ invoice.cardExpirationDate }}</td>
+                    <td>{{ invoice.verificationNumber }}</td>
+                    <td>{{ invoice.transactionNumber }}</td>
+                    <td>{{ invoice.invoiceNumber }}</td>
+                    <td>{{ invoice.unitName }}</td>
+                    <td>{{ invoice.customerName }}</td>
+                    <td>{{ invoice.amountOfTheInvoice }}</td>
+                    <td>{{ invoice.amountPaid }}</td>
+                    <td>
+                        <div *ngIf="invoice.card">
+                            <a [routerLink]="['/card', invoice.card?.id, 'view']" >{{ invoice.card?.number }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="invoice.customer">
+                            <a [routerLink]="['/customer', invoice.customer?.id, 'view']" >{{ invoice.customer?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/invoice', invoice.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/invoice', invoice.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(invoice)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="invoices && invoices.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

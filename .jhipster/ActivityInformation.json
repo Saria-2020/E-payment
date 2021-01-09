@@ -1,0 +1,70 @@
+{
+  "name": "ActivityInformation",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sector",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "typeOfActivity",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "propertyType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "areaClass",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "architectureType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "numberOfFloors",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "features",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "descriptionOfTheFeatures",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "category",
+      "otherEntityRelationshipName": "activityInformation",
+      "relationshipName": "category",
+      "otherEntityField": "name",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "customer",
+      "otherEntityRelationshipName": "activityInformation",
+      "relationshipName": "customer",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20201123220449",
+  "entityTableName": "activity_information",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

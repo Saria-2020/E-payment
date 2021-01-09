@@ -1,0 +1,32 @@
+{
+  "ePaymentApp": {
+    "activityInformation": {
+      "home": {
+        "title": "Activity Informations",
+        "createLabel": "Create a new Activity Information",
+        "createOrEditLabel": "Create or edit a Activity Information",
+        "notFound": "No Activity Informations found"
+      },
+      "created": "A new Activity Information is created with identifier {{ param }}",
+      "updated": "A Activity Information is updated with identifier {{ param }}",
+      "deleted": "A Activity Information is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Activity Information {{ id }}?"
+      },
+      "detail": {
+        "title": "Activity Information"
+      },
+      "name": "Name",
+      "sector": "Sector",
+      "typeOfActivity": "Type Of Activity",
+      "propertyType": "Property Type",
+      "areaClass": "Area Class",
+      "architectureType": "Architecture Type",
+      "numberOfFloors": "Number Of Floors",
+      "features": "Features",
+      "descriptionOfTheFeatures": "Description Of The Features",
+      "category": "Category",
+      "customer": "Customer"
+    }
+  }
+}

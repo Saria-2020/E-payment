@@ -69,3 +69,4 @@ relationship OneToMany {
 
 paginate * with pagination
 service * with serviceImpl
+filter *

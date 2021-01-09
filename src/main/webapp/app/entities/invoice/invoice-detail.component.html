@@ -1,0 +1,82 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="invoice">
+            <h2><span jhiTranslate="ePaymentApp.invoice.detail.title">Invoice</span> {{ invoice.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="ePaymentApp.invoice.date">Date</span></dt>
+                <dd>
+                    <span>{{ invoice.date }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.invoice.uniqueNumberCustomer">Unique Number Customer</span></dt>
+                <dd>
+                    <span>{{ invoice.uniqueNumberCustomer }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.invoice.nameOfTheCardOwner">Name Of The Card Owner</span></dt>
+                <dd>
+                    <span>{{ invoice.nameOfTheCardOwner }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.invoice.cardExpirationDate">Card Expiration Date</span></dt>
+                <dd>
+                    <span>{{ invoice.cardExpirationDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.invoice.verificationNumber">Verification Number</span></dt>
+                <dd>
+                    <span>{{ invoice.verificationNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.invoice.transactionNumber">Transaction Number</span></dt>
+                <dd>
+                    <span>{{ invoice.transactionNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.invoice.invoiceNumber">Invoice Number</span></dt>
+                <dd>
+                    <span>{{ invoice.invoiceNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.invoice.unitName">Unit Name</span></dt>
+                <dd>
+                    <span>{{ invoice.unitName }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.invoice.customerName">Customer Name</span></dt>
+                <dd>
+                    <span>{{ invoice.customerName }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.invoice.amountOfTheInvoice">Amount Of The Invoice</span></dt>
+                <dd>
+                    <span>{{ invoice.amountOfTheInvoice }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.invoice.amountPaid">Amount Paid</span></dt>
+                <dd>
+                    <span>{{ invoice.amountPaid }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.invoice.card">Card</span></dt>
+                <dd>
+                    <div *ngIf="invoice.card">
+                        <a [routerLink]="['/card', invoice.card?.id, 'view']">{{ invoice.card?.number }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.invoice.customer">Customer</span></dt>
+                <dd>
+                    <div *ngIf="invoice.customer">
+                        <a [routerLink]="['/customer', invoice.customer?.id, 'view']">{{ invoice.customer?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/invoice', invoice.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

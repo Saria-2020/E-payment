@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="geographicalData">
+            <h2><span jhiTranslate="ePaymentApp.geographicalData.detail.title">Geographical Data</span> {{ geographicalData.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="ePaymentApp.geographicalData.state">State</span></dt>
+                <dd>
+                    <span>{{ geographicalData.state }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.geographicalData.units">Units</span></dt>
+                <dd>
+                    <span>{{ geographicalData.units }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.geographicalData.district">District</span></dt>
+                <dd>
+                    <span>{{ geographicalData.district }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.geographicalData.square">Square</span></dt>
+                <dd>
+                    <span>{{ geographicalData.square }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.geographicalData.realEstateNumber">Real Estate Number</span></dt>
+                <dd>
+                    <span>{{ geographicalData.realEstateNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.geographicalData.activityNumber">Activity Number</span></dt>
+                <dd>
+                    <span>{{ geographicalData.activityNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.geographicalData.areaOfTheRealEstate">Area Of The Real Estate</span></dt>
+                <dd>
+                    <span>{{ geographicalData.areaOfTheRealEstate }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.geographicalData.customer">Customer</span></dt>
+                <dd>
+                    <div *ngIf="geographicalData.customer">
+                        <a [routerLink]="['/customer', geographicalData.customer?.id, 'view']">{{ geographicalData.customer?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/geographical-data', geographicalData.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

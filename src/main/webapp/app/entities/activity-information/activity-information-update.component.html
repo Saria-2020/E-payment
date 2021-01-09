@@ -1,0 +1,96 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-activity-information-heading" jhiTranslate="ePaymentApp.activityInformation.home.createOrEditLabel">Create or edit a Activity Information</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ePaymentApp.activityInformation.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ePaymentApp.activityInformation.sector" for="field_sector">Sector</label>
+                    <input type="text" class="form-control" name="sector" id="field_sector"
+                           formControlName="sector"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ePaymentApp.activityInformation.typeOfActivity" for="field_typeOfActivity">Type Of Activity</label>
+                    <input type="text" class="form-control" name="typeOfActivity" id="field_typeOfActivity"
+                           formControlName="typeOfActivity"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ePaymentApp.activityInformation.propertyType" for="field_propertyType">Property Type</label>
+                    <input type="text" class="form-control" name="propertyType" id="field_propertyType"
+                           formControlName="propertyType"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ePaymentApp.activityInformation.areaClass" for="field_areaClass">Area Class</label>
+                    <input type="text" class="form-control" name="areaClass" id="field_areaClass"
+                           formControlName="areaClass"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ePaymentApp.activityInformation.architectureType" for="field_architectureType">Architecture Type</label>
+                    <input type="text" class="form-control" name="architectureType" id="field_architectureType"
+                           formControlName="architectureType"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ePaymentApp.activityInformation.numberOfFloors" for="field_numberOfFloors">Number Of Floors</label>
+                    <input type="text" class="form-control" name="numberOfFloors" id="field_numberOfFloors"
+                           formControlName="numberOfFloors"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ePaymentApp.activityInformation.features" for="field_features">Features</label>
+                    <input type="text" class="form-control" name="features" id="field_features"
+                           formControlName="features"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ePaymentApp.activityInformation.descriptionOfTheFeatures" for="field_descriptionOfTheFeatures">Description Of The Features</label>
+                    <textarea class="form-control" name="descriptionOfTheFeatures" id="field_descriptionOfTheFeatures"
+                              formControlName="descriptionOfTheFeatures"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ePaymentApp.activityInformation.category" for="field_category">Category</label>
+                    <select class="form-control" id="field_category" name="category" formControlName="category">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="categoryOption.id === editForm.get('category')!.value?.id ? editForm.get('category')!.value : categoryOption" *ngFor="let categoryOption of categories; trackBy: trackById">{{ categoryOption.name }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ePaymentApp.activityInformation.customer" for="field_customer">Customer</label>
+                    <select class="form-control" id="field_customer" name="customer" formControlName="customer">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="customerOption.id === editForm.get('customer')!.value?.id ? editForm.get('customer')!.value : customerOption" *ngFor="let customerOption of customers; trackBy: trackById">{{ customerOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

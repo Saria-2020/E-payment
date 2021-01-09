@@ -1,0 +1,29 @@
+{
+  "ePaymentApp": {
+    "geographicalData": {
+      "home": {
+        "title": "Geographical Data",
+        "createLabel": "Create a new Geographical Data",
+        "createOrEditLabel": "Create or edit a Geographical Data",
+        "notFound": "No Geographical Data found"
+      },
+      "created": "A new Geographical Data is created with identifier {{ param }}",
+      "updated": "A Geographical Data is updated with identifier {{ param }}",
+      "deleted": "A Geographical Data is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Geographical Data {{ id }}?"
+      },
+      "detail": {
+        "title": "Geographical Data"
+      },
+      "state": "State",
+      "units": "Units",
+      "district": "District",
+      "square": "Square",
+      "realEstateNumber": "Real Estate Number",
+      "activityNumber": "Activity Number",
+      "areaOfTheRealEstate": "Area Of The Real Estate",
+      "customer": "Customer"
+    }
+  }
+}

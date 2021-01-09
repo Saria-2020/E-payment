@@ -1,6 +1,5 @@
 <nav class="navbar navbar-dark navbar-expand-md bg-dark">
-    <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
-        <span class="logo-img"></span>
+
         <span jhiTranslate="global.title" class="navbar-title">EPayment</span> <span class="navbar-version">{{ version }}</span>
     </a>
     <a class="navbar-toggler d-lg-none" href="javascript:void(0);" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNavbar()">
@@ -16,17 +15,55 @@
                     </span>
                 </a>
             </li>
+
             <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
-            <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
-                    <span>
+
+            <li  *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <a *jhiHasAnyAuthority="'ROLE_ADMIN'" class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
+                    <span *jhiHasAnyAuthority="'ROLE_ADMIN'">
                         <fa-icon icon="th-list"></fa-icon>
-                        <span jhiTranslate="global.menu.entities.main">
-                            Entities
+                        <span *jhiHasAnyAuthority="'ROLE_ADMIN'" >
+                            Services
                         </span>
                     </span>
                 </a>
-                <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
+                <ul *jhiHasAnyAuthority="'ROLE_ADMIN'" class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
+                    <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                        <a class="dropdown-item" routerLink="customer" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.customer">Customer</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="invoice" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.invoice">Invoice</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="geographical-data" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.geographicalData">Geographical Data</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="activity-information" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.activityInformation">Activity Information</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="category" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.category">Category</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="card" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.card">Card</span>
+                        </a>
+                    </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>
@@ -44,7 +81,7 @@
                             <span jhiTranslate="global.menu.admin.userManagement">User management</span>
                         </a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a class="dropdown-item" routerLink="admin/metrics" routerLinkActive="active" (click)="collapseNavbar()">
                             <fa-icon icon="tachometer-alt" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.admin.metrics">Metrics</span>
@@ -73,7 +110,7 @@
                             <fa-icon icon="tasks" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.admin.logs">Logs</span>
                         </a>
-                    </li>
+                    </li> -->
                     <li *ngIf="swaggerEnabled">
                         <a class="dropdown-item" routerLink="admin/docs" routerLinkActive="active" (click)="collapseNavbar()">
                             <fa-icon icon="book" [fixedWidth]="true"></fa-icon>

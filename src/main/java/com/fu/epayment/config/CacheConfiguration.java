@@ -48,6 +48,16 @@ public class CacheConfiguration {
             createCache(cm, com.fu.epayment.domain.User.class.getName());
             createCache(cm, com.fu.epayment.domain.Authority.class.getName());
             createCache(cm, com.fu.epayment.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.fu.epayment.domain.Customer.class.getName());
+            createCache(cm, com.fu.epayment.domain.Customer.class.getName() + ".invoices");
+            createCache(cm, com.fu.epayment.domain.Customer.class.getName() + ".activityInformations");
+            createCache(cm, com.fu.epayment.domain.Customer.class.getName() + ".geographicalData");
+            createCache(cm, com.fu.epayment.domain.Customer.class.getName() + ".cards");
+            createCache(cm, com.fu.epayment.domain.Invoice.class.getName());
+            createCache(cm, com.fu.epayment.domain.GeographicalData.class.getName());
+            createCache(cm, com.fu.epayment.domain.ActivityInformation.class.getName());
+            createCache(cm, com.fu.epayment.domain.Category.class.getName());
+            createCache(cm, com.fu.epayment.domain.Card.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

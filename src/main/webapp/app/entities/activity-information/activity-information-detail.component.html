@@ -1,0 +1,74 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="activityInformation">
+            <h2><span jhiTranslate="ePaymentApp.activityInformation.detail.title">Activity Information</span> {{ activityInformation.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="ePaymentApp.activityInformation.name">Name</span></dt>
+                <dd>
+                    <span>{{ activityInformation.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.activityInformation.sector">Sector</span></dt>
+                <dd>
+                    <span>{{ activityInformation.sector }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.activityInformation.typeOfActivity">Type Of Activity</span></dt>
+                <dd>
+                    <span>{{ activityInformation.typeOfActivity }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.activityInformation.propertyType">Property Type</span></dt>
+                <dd>
+                    <span>{{ activityInformation.propertyType }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.activityInformation.areaClass">Area Class</span></dt>
+                <dd>
+                    <span>{{ activityInformation.areaClass }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.activityInformation.architectureType">Architecture Type</span></dt>
+                <dd>
+                    <span>{{ activityInformation.architectureType }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.activityInformation.numberOfFloors">Number Of Floors</span></dt>
+                <dd>
+                    <span>{{ activityInformation.numberOfFloors }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.activityInformation.features">Features</span></dt>
+                <dd>
+                    <span>{{ activityInformation.features }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.activityInformation.descriptionOfTheFeatures">Description Of The Features</span></dt>
+                <dd>
+                    <span>{{ activityInformation.descriptionOfTheFeatures }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.activityInformation.category">Category</span></dt>
+                <dd>
+                    <div *ngIf="activityInformation.category">
+                        <a [routerLink]="['/category', activityInformation.category?.id, 'view']">{{ activityInformation.category?.name }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.activityInformation.customer">Customer</span></dt>
+                <dd>
+                    <div *ngIf="activityInformation.customer">
+                        <a [routerLink]="['/customer', activityInformation.customer?.id, 'view']">{{ activityInformation.customer?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/activity-information', activityInformation.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

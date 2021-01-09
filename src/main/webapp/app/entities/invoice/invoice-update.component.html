@@ -1,0 +1,109 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-invoice-heading" jhiTranslate="ePaymentApp.invoice.home.createOrEditLabel">Create or edit a Invoice</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ePaymentApp.invoice.date" for="field_date">Date</label>
+                    <div class="d-flex">
+                        <input id="field_date" type="datetime-local" class="form-control" name="date" formControlName="date" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ePaymentApp.invoice.uniqueNumberCustomer" for="field_uniqueNumberCustomer">Unique Number Customer</label>
+                    <input type="text" class="form-control" name="uniqueNumberCustomer" id="field_uniqueNumberCustomer"
+                           formControlName="uniqueNumberCustomer"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ePaymentApp.invoice.nameOfTheCardOwner" for="field_nameOfTheCardOwner">Name Of The Card Owner</label>
+                    <input type="text" class="form-control" name="nameOfTheCardOwner" id="field_nameOfTheCardOwner"
+                           formControlName="nameOfTheCardOwner"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ePaymentApp.invoice.cardExpirationDate" for="field_cardExpirationDate">Card Expiration Date</label>
+                    <input type="text" class="form-control" name="cardExpirationDate" id="field_cardExpirationDate"
+                           formControlName="cardExpirationDate"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ePaymentApp.invoice.verificationNumber" for="field_verificationNumber">Verification Number</label>
+                    <input type="text" class="form-control" name="verificationNumber" id="field_verificationNumber"
+                           formControlName="verificationNumber"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ePaymentApp.invoice.transactionNumber" for="field_transactionNumber">Transaction Number</label>
+                    <input type="text" class="form-control" name="transactionNumber" id="field_transactionNumber"
+                           formControlName="transactionNumber"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ePaymentApp.invoice.invoiceNumber" for="field_invoiceNumber">Invoice Number</label>
+                    <input type="text" class="form-control" name="invoiceNumber" id="field_invoiceNumber"
+                           formControlName="invoiceNumber"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ePaymentApp.invoice.unitName" for="field_unitName">Unit Name</label>
+                    <input type="text" class="form-control" name="unitName" id="field_unitName"
+                           formControlName="unitName"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ePaymentApp.invoice.customerName" for="field_customerName">Customer Name</label>
+                    <input type="text" class="form-control" name="customerName" id="field_customerName"
+                           formControlName="customerName"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ePaymentApp.invoice.amountOfTheInvoice" for="field_amountOfTheInvoice">Amount Of The Invoice</label>
+                    <input type="text" class="form-control" name="amountOfTheInvoice" id="field_amountOfTheInvoice"
+                           formControlName="amountOfTheInvoice"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ePaymentApp.invoice.amountPaid" for="field_amountPaid">Amount Paid</label>
+                    <input type="text" class="form-control" name="amountPaid" id="field_amountPaid"
+                           formControlName="amountPaid"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ePaymentApp.invoice.card" for="field_card">Card</label>
+                    <select class="form-control" id="field_card" name="card" formControlName="card">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="cardOption.id === editForm.get('card')!.value?.id ? editForm.get('card')!.value : cardOption" *ngFor="let cardOption of cards; trackBy: trackById">{{ cardOption.number }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ePaymentApp.invoice.customer" for="field_customer">Customer</label>
+                    <select class="form-control" id="field_customer" name="customer" formControlName="customer">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="customerOption.id === editForm.get('customer')!.value?.id ? editForm.get('customer')!.value : customerOption" *ngFor="let customerOption of customers; trackBy: trackById">{{ customerOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
