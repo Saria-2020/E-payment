@@ -7,6 +7,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A PaymentInfo.
@@ -30,6 +32,10 @@ public class PaymentInfo implements Serializable {
 
     @Column(name = "card_number")
     private String cardNumber;
+
+    @OneToMany(mappedBy = "paymentInfo")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    private Set<Transaction> transactions = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties(value = "accounts", allowSetters = true)
@@ -81,6 +87,31 @@ public class PaymentInfo implements Serializable {
 
     public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
+    }
+
+    public Set<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public PaymentInfo transactions(Set<Transaction> transactions) {
+        this.transactions = transactions;
+        return this;
+    }
+
+    public PaymentInfo addTransactions(Transaction transaction) {
+        this.transactions.add(transaction);
+        transaction.setPaymentInfo(this);
+        return this;
+    }
+
+    public PaymentInfo removeTransactions(Transaction transaction) {
+        this.transactions.remove(transaction);
+        transaction.setPaymentInfo(null);
+        return this;
+    }
+
+    public void setTransactions(Set<Transaction> transactions) {
+        this.transactions = transactions;
     }
 
     public Customer getCustomer() {

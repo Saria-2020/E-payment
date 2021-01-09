@@ -1,3 +1,4 @@
+import { ITransaction } from 'app/shared/model/transaction.model';
 import { ICustomer } from 'app/shared/model/customer.model';
 
 export interface IPaymentInfo {
@@ -5,6 +6,7 @@ export interface IPaymentInfo {
   name?: string;
   accountNumber?: string;
   cardNumber?: string;
+  transactions?: ITransaction[];
   customer?: ICustomer;
 }
 
@@ -14,6 +16,7 @@ export class PaymentInfo implements IPaymentInfo {
     public name?: string,
     public accountNumber?: string,
     public cardNumber?: string,
+    public transactions?: ITransaction[],
     public customer?: ICustomer
   ) {}
 }

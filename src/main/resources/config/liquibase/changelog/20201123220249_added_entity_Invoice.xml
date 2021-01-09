@@ -28,10 +28,13 @@
             <column name="unit_name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="amount_of_the_invoice" type="varchar(255)">
+            <column name="total_amount" type="double">
                 <constraints nullable="true" />
             </column>
-            <column name="amount_paid" type="varchar(255)">
+            <column name="amount_paid" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="paid" type="boolean">
                 <constraints nullable="true" />
             </column>
             <column name="transaction_id" type="bigint">
@@ -68,8 +71,9 @@
             <column name="date" type="datetime"/>
             <column name="verification_number" type="string"/>
             <column name="unit_name" type="string"/>
-            <column name="amount_of_the_invoice" type="string"/>
-            <column name="amount_paid" type="string"/>
+            <column name="total_amount" type="numeric"/>
+            <column name="amount_paid" type="numeric"/>
+            <column name="paid" type="boolean"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

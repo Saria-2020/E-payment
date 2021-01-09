@@ -20,8 +20,9 @@
       "uuid": "Uuid",
       "amount": "Amount",
       "dateTime": "Date Time",
-      "paymentInfo": "Payment Info",
-      "invoice": "Invoice"
+      "paymentDetails": "Payment Details",
+      "invoice": "Invoice",
+      "paymentInfo": "Payment Info"
     }
   }
 }

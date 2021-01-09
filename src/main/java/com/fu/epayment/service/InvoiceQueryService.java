@@ -97,15 +97,22 @@ public class InvoiceQueryService extends QueryService<Invoice> {
             if (criteria.getUnitName() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getUnitName(), Invoice_.unitName));
             }
-            if (criteria.getAmountOfTheInvoice() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getAmountOfTheInvoice(), Invoice_.amountOfTheInvoice));
+            if (criteria.getTotalAmount() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getTotalAmount(), Invoice_.totalAmount));
             }
             if (criteria.getAmountPaid() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getAmountPaid(), Invoice_.amountPaid));
+                specification = specification.and(buildRangeSpecification(criteria.getAmountPaid(), Invoice_.amountPaid));
+            }
+            if (criteria.getPaid() != null) {
+                specification = specification.and(buildSpecification(criteria.getPaid(), Invoice_.paid));
             }
             if (criteria.getTransactionId() != null) {
                 specification = specification.and(buildSpecification(criteria.getTransactionId(),
                     root -> root.join(Invoice_.transaction, JoinType.LEFT).get(Transaction_.id)));
+            }
+            if (criteria.getItemsId() != null) {
+                specification = specification.and(buildSpecification(criteria.getItemsId(),
+                    root -> root.join(Invoice_.items, JoinType.LEFT).get(InvoiceItem_.id)));
             }
             if (criteria.getCustomerId() != null) {
                 specification = specification.and(buildSpecification(criteria.getCustomerId(),

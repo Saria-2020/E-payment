@@ -20,9 +20,11 @@
       "date": "Date",
       "verificationNumber": "Verification Number",
       "unitName": "Unit Name",
-      "amountOfTheInvoice": "Amount Of The Invoice",
+      "totalAmount": "Total Amount",
       "amountPaid": "Amount Paid",
+      "paid": "Paid",
       "transaction": "Transaction",
+      "items": "Items",
       "customer": "Customer"
     }
   }

@@ -37,9 +37,17 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ePaymentApp.transaction.paymentDetails" for="field_paymentDetails">Payment Details</label>
+                    <input type="text" class="form-control" name="paymentDetails" id="field_paymentDetails"
+                           formControlName="paymentDetails"/>
+                </div>
+
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ePaymentApp.transaction.paymentInfo" for="field_paymentInfo">Payment Info</label>
-                    <input type="text" class="form-control" name="paymentInfo" id="field_paymentInfo"
-                           formControlName="paymentInfo"/>
+                    <select class="form-control" id="field_paymentInfo" name="paymentInfo" formControlName="paymentInfo">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="paymentInfoOption.id === editForm.get('paymentInfo')!.value?.id ? editForm.get('paymentInfo')!.value : paymentInfoOption" *ngFor="let paymentInfoOption of paymentinfos; trackBy: trackById">{{ paymentInfoOption.name }}</option>
+                    </select>
                 </div>
             </div>
 

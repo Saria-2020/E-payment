@@ -18,12 +18,16 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "amountOfTheInvoice",
-      "fieldType": "String"
+      "fieldName": "totalAmount",
+      "fieldType": "Double"
     },
     {
       "fieldName": "amountPaid",
-      "fieldType": "String"
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "paid",
+      "fieldType": "Boolean"
     }
   ],
   "relationships": [
@@ -34,6 +38,12 @@
       "relationshipName": "transaction",
       "otherEntityField": "name",
       "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "invoiceItem",
+      "otherEntityRelationshipName": "invoice",
+      "relationshipName": "items"
     },
     {
       "relationshipType": "many-to-one",

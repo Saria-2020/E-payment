@@ -27,7 +27,8 @@
                     <th scope="col"  jhiSortBy="uuid"><span jhiTranslate="ePaymentApp.transaction.uuid">Uuid</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="amount"><span jhiTranslate="ePaymentApp.transaction.amount">Amount</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="dateTime"><span jhiTranslate="ePaymentApp.transaction.dateTime">Date Time</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="paymentInfo"><span jhiTranslate="ePaymentApp.transaction.paymentInfo">Payment Info</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="paymentDetails"><span jhiTranslate="ePaymentApp.transaction.paymentDetails">Payment Details</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="paymentInfo.name"><span jhiTranslate="ePaymentApp.transaction.paymentInfo">Payment Info</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -38,7 +39,12 @@
                     <td>{{ transaction.uuid }}</td>
                     <td>{{ transaction.amount }}</td>
                     <td>{{ transaction.dateTime | date:'medium' }}</td>
-                    <td>{{ transaction.paymentInfo }}</td>
+                    <td>{{ transaction.paymentDetails }}</td>
+                    <td>
+                        <div *ngIf="transaction.paymentInfo">
+                            <a [routerLink]="['/payment-info', transaction.paymentInfo?.id, 'view']" >{{ transaction.paymentInfo?.name }}</a>
+                        </div>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

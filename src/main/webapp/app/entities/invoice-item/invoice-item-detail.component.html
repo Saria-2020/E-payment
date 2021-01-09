@@ -1,0 +1,40 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="invoiceItem">
+            <h2><span jhiTranslate="ePaymentApp.invoiceItem.detail.title">Invoice Item</span> {{ invoiceItem.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="ePaymentApp.invoiceItem.name">Name</span></dt>
+                <dd>
+                    <span>{{ invoiceItem.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.invoiceItem.amount">Amount</span></dt>
+                <dd>
+                    <span>{{ invoiceItem.amount }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.invoiceItem.invoice">Invoice</span></dt>
+                <dd>
+                    <div *ngIf="invoiceItem.invoice">
+                        <a [routerLink]="['/invoice', invoiceItem.invoice?.id, 'view']">{{ invoiceItem.invoice?.invoiceNumber }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/invoice-item', invoiceItem.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

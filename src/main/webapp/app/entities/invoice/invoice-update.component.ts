@@ -32,8 +32,9 @@ export class InvoiceUpdateComponent implements OnInit {
     date: [],
     verificationNumber: [],
     unitName: [],
-    amountOfTheInvoice: [],
+    totalAmount: [],
     amountPaid: [],
+    paid: [],
     transaction: [],
     customer: [],
   });
@@ -88,8 +89,9 @@ export class InvoiceUpdateComponent implements OnInit {
       date: invoice.date ? invoice.date.format(DATE_TIME_FORMAT) : null,
       verificationNumber: invoice.verificationNumber,
       unitName: invoice.unitName,
-      amountOfTheInvoice: invoice.amountOfTheInvoice,
+      totalAmount: invoice.totalAmount,
       amountPaid: invoice.amountPaid,
+      paid: invoice.paid,
       transaction: invoice.transaction,
       customer: invoice.customer,
     });
@@ -117,8 +119,9 @@ export class InvoiceUpdateComponent implements OnInit {
       date: this.editForm.get(['date'])!.value ? moment(this.editForm.get(['date'])!.value, DATE_TIME_FORMAT) : undefined,
       verificationNumber: this.editForm.get(['verificationNumber'])!.value,
       unitName: this.editForm.get(['unitName'])!.value,
-      amountOfTheInvoice: this.editForm.get(['amountOfTheInvoice'])!.value,
+      totalAmount: this.editForm.get(['totalAmount'])!.value,
       amountPaid: this.editForm.get(['amountPaid'])!.value,
+      paid: this.editForm.get(['paid'])!.value,
       transaction: this.editForm.get(['transaction'])!.value,
       customer: this.editForm.get(['customer'])!.value,
     };

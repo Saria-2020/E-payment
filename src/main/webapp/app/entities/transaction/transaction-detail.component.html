@@ -24,9 +24,15 @@
                 <dd>
                     <span>{{ transaction.dateTime }}</span>
                 </dd>
+                <dt><span jhiTranslate="ePaymentApp.transaction.paymentDetails">Payment Details</span></dt>
+                <dd>
+                    <span>{{ transaction.paymentDetails }}</span>
+                </dd>
                 <dt><span jhiTranslate="ePaymentApp.transaction.paymentInfo">Payment Info</span></dt>
                 <dd>
-                    <span>{{ transaction.paymentInfo }}</span>
+                    <div *ngIf="transaction.paymentInfo">
+                        <a [routerLink]="['/payment-info', transaction.paymentInfo?.id, 'view']">{{ transaction.paymentInfo?.name }}</a>
+                    </div>
                 </dd>
             </dl>
 

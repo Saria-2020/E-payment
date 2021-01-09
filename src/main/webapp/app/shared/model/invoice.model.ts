@@ -1,5 +1,6 @@
 import { Moment } from 'moment';
 import { ITransaction } from 'app/shared/model/transaction.model';
+import { IInvoiceItem } from 'app/shared/model/invoice-item.model';
 import { ICustomer } from 'app/shared/model/customer.model';
 
 export interface IInvoice {
@@ -8,9 +9,11 @@ export interface IInvoice {
   date?: Moment;
   verificationNumber?: string;
   unitName?: string;
-  amountOfTheInvoice?: string;
-  amountPaid?: string;
+  totalAmount?: number;
+  amountPaid?: number;
+  paid?: boolean;
   transaction?: ITransaction;
+  items?: IInvoiceItem[];
   customer?: ICustomer;
 }
 
@@ -21,9 +24,13 @@ export class Invoice implements IInvoice {
     public date?: Moment,
     public verificationNumber?: string,
     public unitName?: string,
-    public amountOfTheInvoice?: string,
-    public amountPaid?: string,
+    public totalAmount?: number,
+    public amountPaid?: number,
+    public paid?: boolean,
     public transaction?: ITransaction,
+    public items?: IInvoiceItem[],
     public customer?: ICustomer
-  ) {}
+  ) {
+    this.paid = this.paid || false;
+  }
 }

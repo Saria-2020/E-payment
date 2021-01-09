@@ -97,12 +97,16 @@ public class TransactionQueryService extends QueryService<Transaction> {
             if (criteria.getDateTime() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getDateTime(), Transaction_.dateTime));
             }
-            if (criteria.getPaymentInfo() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getPaymentInfo(), Transaction_.paymentInfo));
+            if (criteria.getPaymentDetails() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getPaymentDetails(), Transaction_.paymentDetails));
             }
             if (criteria.getInvoiceId() != null) {
                 specification = specification.and(buildSpecification(criteria.getInvoiceId(),
                     root -> root.join(Transaction_.invoice, JoinType.LEFT).get(Invoice_.id)));
+            }
+            if (criteria.getPaymentInfoId() != null) {
+                specification = specification.and(buildSpecification(criteria.getPaymentInfoId(),
+                    root -> root.join(Transaction_.paymentInfo, JoinType.LEFT).get(PaymentInfo_.id)));
             }
         }
         return specification;

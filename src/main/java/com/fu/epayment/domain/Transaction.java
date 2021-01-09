@@ -1,6 +1,7 @@
 package com.fu.epayment.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -35,12 +36,16 @@ public class Transaction implements Serializable {
     @Column(name = "date_time")
     private Instant dateTime;
 
-    @Column(name = "payment_info")
-    private String paymentInfo;
+    @Column(name = "payment_details")
+    private String paymentDetails;
 
     @OneToOne(mappedBy = "transaction")
     @JsonIgnore
     private Invoice invoice;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "transactions", allowSetters = true)
+    private PaymentInfo paymentInfo;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -103,17 +108,17 @@ public class Transaction implements Serializable {
         this.dateTime = dateTime;
     }
 
-    public String getPaymentInfo() {
-        return paymentInfo;
+    public String getPaymentDetails() {
+        return paymentDetails;
     }
 
-    public Transaction paymentInfo(String paymentInfo) {
-        this.paymentInfo = paymentInfo;
+    public Transaction paymentDetails(String paymentDetails) {
+        this.paymentDetails = paymentDetails;
         return this;
     }
 
-    public void setPaymentInfo(String paymentInfo) {
-        this.paymentInfo = paymentInfo;
+    public void setPaymentDetails(String paymentDetails) {
+        this.paymentDetails = paymentDetails;
     }
 
     public Invoice getInvoice() {
@@ -127,6 +132,19 @@ public class Transaction implements Serializable {
 
     public void setInvoice(Invoice invoice) {
         this.invoice = invoice;
+    }
+
+    public PaymentInfo getPaymentInfo() {
+        return paymentInfo;
+    }
+
+    public Transaction paymentInfo(PaymentInfo paymentInfo) {
+        this.paymentInfo = paymentInfo;
+        return this;
+    }
+
+    public void setPaymentInfo(PaymentInfo paymentInfo) {
+        this.paymentInfo = paymentInfo;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -155,7 +173,7 @@ public class Transaction implements Serializable {
             ", uuid='" + getUuid() + "'" +
             ", amount=" + getAmount() +
             ", dateTime='" + getDateTime() + "'" +
-            ", paymentInfo='" + getPaymentInfo() + "'" +
+            ", paymentDetails='" + getPaymentDetails() + "'" +
             "}";
     }
 }

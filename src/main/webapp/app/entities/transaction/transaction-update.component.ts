@@ -9,6 +9,8 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { ITransaction, Transaction } from 'app/shared/model/transaction.model';
 import { TransactionService } from './transaction.service';
+import { IPaymentInfo } from 'app/shared/model/payment-info.model';
+import { PaymentInfoService } from 'app/entities/payment-info/payment-info.service';
 
 @Component({
   selector: 'jhi-transaction-update',
@@ -16,6 +18,7 @@ import { TransactionService } from './transaction.service';
 })
 export class TransactionUpdateComponent implements OnInit {
   isSaving = false;
+  paymentinfos: IPaymentInfo[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -23,10 +26,16 @@ export class TransactionUpdateComponent implements OnInit {
     uuid: [],
     amount: [],
     dateTime: [],
+    paymentDetails: [],
     paymentInfo: [],
   });
 
-  constructor(protected transactionService: TransactionService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(
+    protected transactionService: TransactionService,
+    protected paymentInfoService: PaymentInfoService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ transaction }) => {
@@ -36,6 +45,8 @@ export class TransactionUpdateComponent implements OnInit {
       }
 
       this.updateForm(transaction);
+
+      this.paymentInfoService.query().subscribe((res: HttpResponse<IPaymentInfo[]>) => (this.paymentinfos = res.body || []));
     });
   }
 
@@ -46,6 +57,7 @@ export class TransactionUpdateComponent implements OnInit {
       uuid: transaction.uuid,
       amount: transaction.amount,
       dateTime: transaction.dateTime ? transaction.dateTime.format(DATE_TIME_FORMAT) : null,
+      paymentDetails: transaction.paymentDetails,
       paymentInfo: transaction.paymentInfo,
     });
   }
@@ -72,6 +84,7 @@ export class TransactionUpdateComponent implements OnInit {
       uuid: this.editForm.get(['uuid'])!.value,
       amount: this.editForm.get(['amount'])!.value,
       dateTime: this.editForm.get(['dateTime'])!.value ? moment(this.editForm.get(['dateTime'])!.value, DATE_TIME_FORMAT) : undefined,
+      paymentDetails: this.editForm.get(['paymentDetails'])!.value,
       paymentInfo: this.editForm.get(['paymentInfo'])!.value,
     };
   }
@@ -90,5 +103,9 @@ export class TransactionUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  trackById(index: number, item: IPaymentInfo): any {
+    return item.id;
   }
 }

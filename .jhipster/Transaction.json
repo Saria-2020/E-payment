@@ -18,7 +18,7 @@
       "fieldType": "Instant"
     },
     {
-      "fieldName": "paymentInfo",
+      "fieldName": "paymentDetails",
       "fieldType": "String"
     }
   ],
@@ -29,6 +29,13 @@
       "otherEntityRelationshipName": "transaction",
       "relationshipName": "invoice",
       "ownerSide": false
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "paymentInfo",
+      "otherEntityRelationshipName": "transactions",
+      "relationshipName": "paymentInfo",
+      "otherEntityField": "name"
     }
   ],
   "changelogDate": "20210109194150",

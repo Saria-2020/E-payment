@@ -12,10 +12,17 @@ entity Invoice {
  date Instant
  verificationNumber String,
  unitName String,
- amountOfTheInvoice String,
- amountPaid String
+ totalAmount Double,
+ amountPaid Double,
+ paid Boolean
  // Transaction
  // Customer
+}
+
+entity InvoiceItem {
+ name String,
+ amount Double
+ // Invoice
 }
 
 entity GeographicalData {
@@ -60,7 +67,7 @@ entity GeographicalData {
     uuid String
     amount Double
     dateTime Instant
-    paymentInfo String
+    paymentDetails String
     // Invoice
 }
 
@@ -74,6 +81,10 @@ relationship OneToMany {
     Customer{activityInformation(name)} to ActivityInformation{customer(phoneNumber)}
     Customer{GeographicalData(realEstateNumber)} to GeographicalData{customer(phoneNumber)}
     Customer{accounts(name)} to PaymentInfo{customer(phoneNumber)}
+
+    Invoice{items(name)} to InvoiceItem{invoice(invoiceNumber)}
+
+    PaymentInfo{transactions(name)} to Transaction{paymentInfo(name)}
 
     Category{activityInformation(name)} to ActivityInformation{category(name)}
 }

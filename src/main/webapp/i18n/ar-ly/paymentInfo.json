@@ -19,6 +19,7 @@
       "name": "Name",
       "accountNumber": "Account Number",
       "cardNumber": "Card Number",
+      "transactions": "Transactions",
       "customer": "Customer"
     }
   }

@@ -35,9 +35,11 @@ public class TransactionCriteria implements Serializable, Criteria {
 
     private InstantFilter dateTime;
 
-    private StringFilter paymentInfo;
+    private StringFilter paymentDetails;
 
     private LongFilter invoiceId;
+
+    private LongFilter paymentInfoId;
 
     public TransactionCriteria() {
     }
@@ -48,8 +50,9 @@ public class TransactionCriteria implements Serializable, Criteria {
         this.uuid = other.uuid == null ? null : other.uuid.copy();
         this.amount = other.amount == null ? null : other.amount.copy();
         this.dateTime = other.dateTime == null ? null : other.dateTime.copy();
-        this.paymentInfo = other.paymentInfo == null ? null : other.paymentInfo.copy();
+        this.paymentDetails = other.paymentDetails == null ? null : other.paymentDetails.copy();
         this.invoiceId = other.invoiceId == null ? null : other.invoiceId.copy();
+        this.paymentInfoId = other.paymentInfoId == null ? null : other.paymentInfoId.copy();
     }
 
     @Override
@@ -97,12 +100,12 @@ public class TransactionCriteria implements Serializable, Criteria {
         this.dateTime = dateTime;
     }
 
-    public StringFilter getPaymentInfo() {
-        return paymentInfo;
+    public StringFilter getPaymentDetails() {
+        return paymentDetails;
     }
 
-    public void setPaymentInfo(StringFilter paymentInfo) {
-        this.paymentInfo = paymentInfo;
+    public void setPaymentDetails(StringFilter paymentDetails) {
+        this.paymentDetails = paymentDetails;
     }
 
     public LongFilter getInvoiceId() {
@@ -111,6 +114,14 @@ public class TransactionCriteria implements Serializable, Criteria {
 
     public void setInvoiceId(LongFilter invoiceId) {
         this.invoiceId = invoiceId;
+    }
+
+    public LongFilter getPaymentInfoId() {
+        return paymentInfoId;
+    }
+
+    public void setPaymentInfoId(LongFilter paymentInfoId) {
+        this.paymentInfoId = paymentInfoId;
     }
 
 
@@ -129,8 +140,9 @@ public class TransactionCriteria implements Serializable, Criteria {
             Objects.equals(uuid, that.uuid) &&
             Objects.equals(amount, that.amount) &&
             Objects.equals(dateTime, that.dateTime) &&
-            Objects.equals(paymentInfo, that.paymentInfo) &&
-            Objects.equals(invoiceId, that.invoiceId);
+            Objects.equals(paymentDetails, that.paymentDetails) &&
+            Objects.equals(invoiceId, that.invoiceId) &&
+            Objects.equals(paymentInfoId, that.paymentInfoId);
     }
 
     @Override
@@ -141,8 +153,9 @@ public class TransactionCriteria implements Serializable, Criteria {
         uuid,
         amount,
         dateTime,
-        paymentInfo,
-        invoiceId
+        paymentDetails,
+        invoiceId,
+        paymentInfoId
         );
     }
 
@@ -155,8 +168,9 @@ public class TransactionCriteria implements Serializable, Criteria {
                 (uuid != null ? "uuid=" + uuid + ", " : "") +
                 (amount != null ? "amount=" + amount + ", " : "") +
                 (dateTime != null ? "dateTime=" + dateTime + ", " : "") +
-                (paymentInfo != null ? "paymentInfo=" + paymentInfo + ", " : "") +
+                (paymentDetails != null ? "paymentDetails=" + paymentDetails + ", " : "") +
                 (invoiceId != null ? "invoiceId=" + invoiceId + ", " : "") +
+                (paymentInfoId != null ? "paymentInfoId=" + paymentInfoId + ", " : "") +
             "}";
     }
 

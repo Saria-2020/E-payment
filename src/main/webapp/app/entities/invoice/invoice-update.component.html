@@ -37,15 +37,21 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ePaymentApp.invoice.amountOfTheInvoice" for="field_amountOfTheInvoice">Amount Of The Invoice</label>
-                    <input type="text" class="form-control" name="amountOfTheInvoice" id="field_amountOfTheInvoice"
-                           formControlName="amountOfTheInvoice"/>
+                    <label class="form-control-label" jhiTranslate="ePaymentApp.invoice.totalAmount" for="field_totalAmount">Total Amount</label>
+                    <input type="number" class="form-control" name="totalAmount" id="field_totalAmount"
+                           formControlName="totalAmount"/>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ePaymentApp.invoice.amountPaid" for="field_amountPaid">Amount Paid</label>
-                    <input type="text" class="form-control" name="amountPaid" id="field_amountPaid"
+                    <input type="number" class="form-control" name="amountPaid" id="field_amountPaid"
                            formControlName="amountPaid"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="ePaymentApp.invoice.paid" for="field_paid">Paid</label>
+                    <input type="checkbox" class="form-control" name="paid" id="field_paid"
+                           formControlName="paid"/>
                 </div>
 
                 <div class="form-group">

@@ -8,6 +8,8 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A Invoice.
@@ -35,15 +37,22 @@ public class Invoice implements Serializable {
     @Column(name = "unit_name")
     private String unitName;
 
-    @Column(name = "amount_of_the_invoice")
-    private String amountOfTheInvoice;
+    @Column(name = "total_amount")
+    private Double totalAmount;
 
     @Column(name = "amount_paid")
-    private String amountPaid;
+    private Double amountPaid;
+
+    @Column(name = "paid")
+    private Boolean paid;
 
     @OneToOne
     @JoinColumn(unique = true)
     private Transaction transaction;
+
+    @OneToMany(mappedBy = "invoice")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    private Set<InvoiceItem> items = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties(value = "invoices", allowSetters = true)
@@ -110,30 +119,43 @@ public class Invoice implements Serializable {
         this.unitName = unitName;
     }
 
-    public String getAmountOfTheInvoice() {
-        return amountOfTheInvoice;
+    public Double getTotalAmount() {
+        return totalAmount;
     }
 
-    public Invoice amountOfTheInvoice(String amountOfTheInvoice) {
-        this.amountOfTheInvoice = amountOfTheInvoice;
+    public Invoice totalAmount(Double totalAmount) {
+        this.totalAmount = totalAmount;
         return this;
     }
 
-    public void setAmountOfTheInvoice(String amountOfTheInvoice) {
-        this.amountOfTheInvoice = amountOfTheInvoice;
+    public void setTotalAmount(Double totalAmount) {
+        this.totalAmount = totalAmount;
     }
 
-    public String getAmountPaid() {
+    public Double getAmountPaid() {
         return amountPaid;
     }
 
-    public Invoice amountPaid(String amountPaid) {
+    public Invoice amountPaid(Double amountPaid) {
         this.amountPaid = amountPaid;
         return this;
     }
 
-    public void setAmountPaid(String amountPaid) {
+    public void setAmountPaid(Double amountPaid) {
         this.amountPaid = amountPaid;
+    }
+
+    public Boolean isPaid() {
+        return paid;
+    }
+
+    public Invoice paid(Boolean paid) {
+        this.paid = paid;
+        return this;
+    }
+
+    public void setPaid(Boolean paid) {
+        this.paid = paid;
     }
 
     public Transaction getTransaction() {
@@ -147,6 +169,31 @@ public class Invoice implements Serializable {
 
     public void setTransaction(Transaction transaction) {
         this.transaction = transaction;
+    }
+
+    public Set<InvoiceItem> getItems() {
+        return items;
+    }
+
+    public Invoice items(Set<InvoiceItem> invoiceItems) {
+        this.items = invoiceItems;
+        return this;
+    }
+
+    public Invoice addItems(InvoiceItem invoiceItem) {
+        this.items.add(invoiceItem);
+        invoiceItem.setInvoice(this);
+        return this;
+    }
+
+    public Invoice removeItems(InvoiceItem invoiceItem) {
+        this.items.remove(invoiceItem);
+        invoiceItem.setInvoice(null);
+        return this;
+    }
+
+    public void setItems(Set<InvoiceItem> invoiceItems) {
+        this.items = invoiceItems;
     }
 
     public Customer getCustomer() {
@@ -188,8 +235,9 @@ public class Invoice implements Serializable {
             ", date='" + getDate() + "'" +
             ", verificationNumber='" + getVerificationNumber() + "'" +
             ", unitName='" + getUnitName() + "'" +
-            ", amountOfTheInvoice='" + getAmountOfTheInvoice() + "'" +
-            ", amountPaid='" + getAmountPaid() + "'" +
+            ", totalAmount=" + getTotalAmount() +
+            ", amountPaid=" + getAmountPaid() +
+            ", paid='" + isPaid() + "'" +
             "}";
     }
 }

@@ -1,11 +1,11 @@
-id;invoice_number;date;verification_number;unit_name;amount_of_the_invoice;amount_paid
-1;Texas Concrete;2020-11-23T15:00:05;capability Loop Unbranded Frozen Towels;gold;Grove invoice Australia;reboot Rhode Island bypassing
-2;national Marketing Consultant;2020-11-23T10:17:55;Gorgeous Soft Soap Virginia;Florida Home Loan Account;access;sticky monitor Synergized
-3;parse Horizontal Shirt;2020-11-22T23:09:47;Handcrafted Assistant;Money Market Account;program transmitting EXE;Director Gloves Jamaican Dollar
-4;Cambridgeshire Fully-configurable iterate;2020-11-23T05:58:55;Fresh;Director;attitude-oriented;plug-and-play Function-based
-5;Cotton customized Garden;2020-11-23T11:04:41;Buckinghamshire Agent SDD;Awesome Fresh Table analyzer Chips;transmitting interactive reintermediate;auxiliary
-6;Forward;2020-11-23T02:28:42;Gorgeous Fresh Soap;Colorado;Auto Loan Account Small Rubber Pants;Generic Wooden Hat end-to-end unleash
-7;copying Handmade;2020-11-23T07:57:05;Awesome Fresh Soap;e-markets Arizona Barbados Dollar;CSS;Cambridgeshire Rubber
-8;Accounts seamless Malawi;2020-11-23T13:14:33;Home Loan Account;deploy;Generic Ethiopian Birr Assurance;COM Refined Cotton Bacon eyeballs
-9;Toys payment;2020-11-23T20:39:41;COM functionalities;Concrete;Investment Account;system
-10;matrix;2020-11-23T20:30:59;Comoros 24/7;Factors;Cambodia;Pizza Data
+id;invoice_number;date;verification_number;unit_name;total_amount;amount_paid;paid
+1;Texas Concrete;2020-11-23T15:00:05;capability Loop Unbranded Frozen Towels;gold;74773;47466;false
+2;haptic Licensed Soft Sausages;2020-11-23T08:01:34;bypassing SQL SDR;Consultant;48950;38331;false
+3;quantify;2020-11-23T08:05:39;Borders Soap Checking Account;Baby;36325;20522;true
+4;Synergized 1080p Engineer;2020-11-23T13:13:25;experiences;Handcrafted Assistant;13687;62834;false
+5;program transmitting EXE;2020-11-23T03:36:15;strategic open architecture visualize;Dynamic function;90797;66936;false
+6;HTTP;2020-11-22T22:08:56;black Awesome;Integration structure;11254;44341;false
+7;Garden Well Buckinghamshire;2020-11-22T22:18:18;SDD auxiliary Utah;analyzer Chips;89828;83224;true
+8;Iceland;2020-11-23T06:03:32;auxiliary;Forward;81535;7073;false
+9;Customer;2020-11-23T21:33:35;Cotton Auto Loan Account;Toys;34085;96191;false
+10;Granite end-to-end;2020-11-23T12:25:48;applications array pixel;Awesome Fresh Soap;71655;42722;true

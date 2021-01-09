@@ -60,6 +60,9 @@ public class CacheConfiguration {
             createCache(cm, com.fu.epayment.domain.Category.class.getName() + ".activityInformations");
             createCache(cm, com.fu.epayment.domain.PaymentInfo.class.getName());
             createCache(cm, com.fu.epayment.domain.Transaction.class.getName());
+            createCache(cm, com.fu.epayment.domain.Invoice.class.getName() + ".items");
+            createCache(cm, com.fu.epayment.domain.InvoiceItem.class.getName());
+            createCache(cm, com.fu.epayment.domain.PaymentInfo.class.getName() + ".transactions");
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -27,8 +27,9 @@
                     <th scope="col"  jhiSortBy="date"><span jhiTranslate="ePaymentApp.invoice.date">Date</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="verificationNumber"><span jhiTranslate="ePaymentApp.invoice.verificationNumber">Verification Number</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="unitName"><span jhiTranslate="ePaymentApp.invoice.unitName">Unit Name</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="amountOfTheInvoice"><span jhiTranslate="ePaymentApp.invoice.amountOfTheInvoice">Amount Of The Invoice</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="totalAmount"><span jhiTranslate="ePaymentApp.invoice.totalAmount">Total Amount</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="amountPaid"><span jhiTranslate="ePaymentApp.invoice.amountPaid">Amount Paid</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="paid"><span jhiTranslate="ePaymentApp.invoice.paid">Paid</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="transaction.name"><span jhiTranslate="ePaymentApp.invoice.transaction">Transaction</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="customer.phoneNumber"><span jhiTranslate="ePaymentApp.invoice.customer">Customer</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
@@ -41,8 +42,9 @@
                     <td>{{ invoice.date | date:'medium' }}</td>
                     <td>{{ invoice.verificationNumber }}</td>
                     <td>{{ invoice.unitName }}</td>
-                    <td>{{ invoice.amountOfTheInvoice }}</td>
+                    <td>{{ invoice.totalAmount }}</td>
                     <td>{{ invoice.amountPaid }}</td>
+                    <td>{{ invoice.paid }}</td>
                     <td>
                         <div *ngIf="invoice.transaction">
                             <a [routerLink]="['/transaction', invoice.transaction?.id, 'view']" >{{ invoice.transaction?.name }}</a>

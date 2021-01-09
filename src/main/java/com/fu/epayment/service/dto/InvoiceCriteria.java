@@ -35,11 +35,15 @@ public class InvoiceCriteria implements Serializable, Criteria {
 
     private StringFilter unitName;
 
-    private StringFilter amountOfTheInvoice;
+    private DoubleFilter totalAmount;
 
-    private StringFilter amountPaid;
+    private DoubleFilter amountPaid;
+
+    private BooleanFilter paid;
 
     private LongFilter transactionId;
+
+    private LongFilter itemsId;
 
     private LongFilter customerId;
 
@@ -52,9 +56,11 @@ public class InvoiceCriteria implements Serializable, Criteria {
         this.date = other.date == null ? null : other.date.copy();
         this.verificationNumber = other.verificationNumber == null ? null : other.verificationNumber.copy();
         this.unitName = other.unitName == null ? null : other.unitName.copy();
-        this.amountOfTheInvoice = other.amountOfTheInvoice == null ? null : other.amountOfTheInvoice.copy();
+        this.totalAmount = other.totalAmount == null ? null : other.totalAmount.copy();
         this.amountPaid = other.amountPaid == null ? null : other.amountPaid.copy();
+        this.paid = other.paid == null ? null : other.paid.copy();
         this.transactionId = other.transactionId == null ? null : other.transactionId.copy();
+        this.itemsId = other.itemsId == null ? null : other.itemsId.copy();
         this.customerId = other.customerId == null ? null : other.customerId.copy();
     }
 
@@ -103,20 +109,28 @@ public class InvoiceCriteria implements Serializable, Criteria {
         this.unitName = unitName;
     }
 
-    public StringFilter getAmountOfTheInvoice() {
-        return amountOfTheInvoice;
+    public DoubleFilter getTotalAmount() {
+        return totalAmount;
     }
 
-    public void setAmountOfTheInvoice(StringFilter amountOfTheInvoice) {
-        this.amountOfTheInvoice = amountOfTheInvoice;
+    public void setTotalAmount(DoubleFilter totalAmount) {
+        this.totalAmount = totalAmount;
     }
 
-    public StringFilter getAmountPaid() {
+    public DoubleFilter getAmountPaid() {
         return amountPaid;
     }
 
-    public void setAmountPaid(StringFilter amountPaid) {
+    public void setAmountPaid(DoubleFilter amountPaid) {
         this.amountPaid = amountPaid;
+    }
+
+    public BooleanFilter getPaid() {
+        return paid;
+    }
+
+    public void setPaid(BooleanFilter paid) {
+        this.paid = paid;
     }
 
     public LongFilter getTransactionId() {
@@ -125,6 +139,14 @@ public class InvoiceCriteria implements Serializable, Criteria {
 
     public void setTransactionId(LongFilter transactionId) {
         this.transactionId = transactionId;
+    }
+
+    public LongFilter getItemsId() {
+        return itemsId;
+    }
+
+    public void setItemsId(LongFilter itemsId) {
+        this.itemsId = itemsId;
     }
 
     public LongFilter getCustomerId() {
@@ -151,9 +173,11 @@ public class InvoiceCriteria implements Serializable, Criteria {
             Objects.equals(date, that.date) &&
             Objects.equals(verificationNumber, that.verificationNumber) &&
             Objects.equals(unitName, that.unitName) &&
-            Objects.equals(amountOfTheInvoice, that.amountOfTheInvoice) &&
+            Objects.equals(totalAmount, that.totalAmount) &&
             Objects.equals(amountPaid, that.amountPaid) &&
+            Objects.equals(paid, that.paid) &&
             Objects.equals(transactionId, that.transactionId) &&
+            Objects.equals(itemsId, that.itemsId) &&
             Objects.equals(customerId, that.customerId);
     }
 
@@ -165,9 +189,11 @@ public class InvoiceCriteria implements Serializable, Criteria {
         date,
         verificationNumber,
         unitName,
-        amountOfTheInvoice,
+        totalAmount,
         amountPaid,
+        paid,
         transactionId,
+        itemsId,
         customerId
         );
     }
@@ -181,9 +207,11 @@ public class InvoiceCriteria implements Serializable, Criteria {
                 (date != null ? "date=" + date + ", " : "") +
                 (verificationNumber != null ? "verificationNumber=" + verificationNumber + ", " : "") +
                 (unitName != null ? "unitName=" + unitName + ", " : "") +
-                (amountOfTheInvoice != null ? "amountOfTheInvoice=" + amountOfTheInvoice + ", " : "") +
+                (totalAmount != null ? "totalAmount=" + totalAmount + ", " : "") +
                 (amountPaid != null ? "amountPaid=" + amountPaid + ", " : "") +
+                (paid != null ? "paid=" + paid + ", " : "") +
                 (transactionId != null ? "transactionId=" + transactionId + ", " : "") +
+                (itemsId != null ? "itemsId=" + itemsId + ", " : "") +
                 (customerId != null ? "customerId=" + customerId + ", " : "") +
             "}";
     }
