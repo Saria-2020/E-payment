@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
     <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+        <form name="editForm" role="form" novalidate (ngSubmit)="register()" [formGroup]="editForm">
             <h2 id="jhi-customer-heading" jhiTranslate="ePaymentApp.customer.home.createOrEditLabel">Create or edit a Customer</h2>
 
             <div>
@@ -23,12 +23,16 @@
                            formControlName="nationalId"/>
                 </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ePaymentApp.customer.user" for="field_user">User</label>
-                    <select class="form-control" id="field_user" name="user" formControlName="user">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.login }}</option>
-                    </select>
+                <div class="form-group" [hidden]="editForm.get('id')!.value">
+                    <label class="form-control-label" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
+                </div>
+
+                <div class="form-group" [hidden]="editForm.get('id')!.value">
+                    <label class="form-control-label" for="field_email">Email</label>
+                    <input type="text" class="form-control" name="email" id="field_email"
+                           formControlName="email"/>
                 </div>
             </div>
 

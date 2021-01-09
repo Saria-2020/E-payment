@@ -9,6 +9,8 @@ import { ICustomer, Customer } from 'app/shared/model/customer.model';
 import { CustomerService } from './customer.service';
 import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
+import { RegisterService } from 'app/account/register/register.service';
+import { JhiLanguageService } from 'ng-jhipster';
 
 @Component({
   selector: 'jhi-customer-update',
@@ -20,16 +22,20 @@ export class CustomerUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    phoneNumber: [],
-    nationalId: [],
+    phoneNumber: [Validators.required],
+    nationalId: [Validators.required],
     user: [],
+    email: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email]],
+    name: [Validators.required],
   });
 
   constructor(
     protected customerService: CustomerService,
     protected userService: UserService,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private registerService: RegisterService,
+    private languageService: JhiLanguageService
   ) {}
 
   ngOnInit(): void {
@@ -46,11 +52,30 @@ export class CustomerUpdateComponent implements OnInit {
       phoneNumber: customer.phoneNumber,
       nationalId: customer.nationalId,
       user: customer.user,
+      email: customer.user?.email,
+      name: customer.user?.firstName,
     });
   }
 
   previousState(): void {
     window.history.back();
+  }
+
+  register(): void {
+    if (this.editForm.get('id')!.value) {
+      this.save();
+    } else {
+      const password = this.editForm.get(['phoneNumber'])!.value;
+      const login = this.editForm.get(['phoneNumber'])!.value;
+      const email = this.editForm.get(['email'])!.value;
+      const firstName = this.editForm.get(['name'])!.value;
+      this.registerService
+        .save({ login, firstName, email, password, langKey: this.languageService.getCurrentLanguage() })
+        .subscribe(response => {
+          this.editForm.get('user')?.setValue(response.body);
+          this.save();
+        });
+    }
   }
 
   save(): void {

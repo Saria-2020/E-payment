@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { SERVER_API_URL } from 'app/app.constants';
@@ -9,7 +9,7 @@ import { IUser } from 'app/core/user/user.model';
 export class RegisterService {
   constructor(private http: HttpClient) {}
 
-  save(account: IUser): Observable<{}> {
-    return this.http.post(SERVER_API_URL + 'api/register', account);
+  save(account: IUser): Observable<HttpResponse<IUser>> {
+    return this.http.post<IUser>(SERVER_API_URL + 'api/register', account, { observe: 'response' });
   }
 }

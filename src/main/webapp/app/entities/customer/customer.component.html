@@ -25,7 +25,7 @@
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="phoneNumber"><span jhiTranslate="ePaymentApp.customer.phoneNumber">Phone Number</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="nationalId"><span jhiTranslate="ePaymentApp.customer.nationalId">National Id</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="user.login"><span jhiTranslate="ePaymentApp.customer.user">User</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="user.firstName"><span jhiTranslate="ePaymentApp.customer.user">User</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -35,7 +35,7 @@
                     <td>{{ customer.phoneNumber }}</td>
                     <td>{{ customer.nationalId }}</td>
                     <td>
-                        {{ customer.user?.login }}
+                        {{ customer.user?.firstName }}
                     </td>
                     <td class="text-right">
                         <div class="btn-group">

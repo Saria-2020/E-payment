@@ -11,14 +11,18 @@ import com.fu.epayment.web.rest.errors.*;
 import com.fu.epayment.web.rest.vm.KeyAndPasswordVM;
 import com.fu.epayment.web.rest.vm.ManagedUserVM;
 
+import io.github.jhipster.web.util.HeaderUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.*;
 
 /**
@@ -59,12 +63,14 @@ public class AccountResource {
      */
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public void registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM) {
+    public ResponseEntity<User> registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM) throws URISyntaxException {
         if (!checkPasswordLength(managedUserVM.getPassword())) {
             throw new InvalidPasswordException();
         }
         User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
-        mailService.sendActivationEmail(user);
+        return ResponseEntity.created(new URI("/api/register/" + user.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert("EPayment", true, "Account", user.getId().toString()))
+            .body(user);
     }
 
     /**
