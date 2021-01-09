@@ -42,9 +42,9 @@ public class ActivityInformationCriteria implements Serializable, Criteria {
 
     private StringFilter features;
 
-    private LongFilter categoryId;
-
     private LongFilter customerId;
+
+    private LongFilter categoryId;
 
     public ActivityInformationCriteria() {
     }
@@ -59,8 +59,8 @@ public class ActivityInformationCriteria implements Serializable, Criteria {
         this.architectureType = other.architectureType == null ? null : other.architectureType.copy();
         this.numberOfFloors = other.numberOfFloors == null ? null : other.numberOfFloors.copy();
         this.features = other.features == null ? null : other.features.copy();
-        this.categoryId = other.categoryId == null ? null : other.categoryId.copy();
         this.customerId = other.customerId == null ? null : other.customerId.copy();
+        this.categoryId = other.categoryId == null ? null : other.categoryId.copy();
     }
 
     @Override
@@ -140,20 +140,20 @@ public class ActivityInformationCriteria implements Serializable, Criteria {
         this.features = features;
     }
 
-    public LongFilter getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(LongFilter categoryId) {
-        this.categoryId = categoryId;
-    }
-
     public LongFilter getCustomerId() {
         return customerId;
     }
 
     public void setCustomerId(LongFilter customerId) {
         this.customerId = customerId;
+    }
+
+    public LongFilter getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(LongFilter categoryId) {
+        this.categoryId = categoryId;
     }
 
 
@@ -176,8 +176,8 @@ public class ActivityInformationCriteria implements Serializable, Criteria {
             Objects.equals(architectureType, that.architectureType) &&
             Objects.equals(numberOfFloors, that.numberOfFloors) &&
             Objects.equals(features, that.features) &&
-            Objects.equals(categoryId, that.categoryId) &&
-            Objects.equals(customerId, that.customerId);
+            Objects.equals(customerId, that.customerId) &&
+            Objects.equals(categoryId, that.categoryId);
     }
 
     @Override
@@ -192,8 +192,8 @@ public class ActivityInformationCriteria implements Serializable, Criteria {
         architectureType,
         numberOfFloors,
         features,
-        categoryId,
-        customerId
+        customerId,
+        categoryId
         );
     }
 
@@ -210,8 +210,8 @@ public class ActivityInformationCriteria implements Serializable, Criteria {
                 (architectureType != null ? "architectureType=" + architectureType + ", " : "") +
                 (numberOfFloors != null ? "numberOfFloors=" + numberOfFloors + ", " : "") +
                 (features != null ? "features=" + features + ", " : "") +
-                (categoryId != null ? "categoryId=" + categoryId + ", " : "") +
                 (customerId != null ? "customerId=" + customerId + ", " : "") +
+                (categoryId != null ? "categoryId=" + categoryId + ", " : "") +
             "}";
     }
 

@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="paymentInfo">
+            <h2><span jhiTranslate="ePaymentApp.paymentInfo.detail.title">Payment Info</span> {{ paymentInfo.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="ePaymentApp.paymentInfo.name">Name</span></dt>
+                <dd>
+                    <span>{{ paymentInfo.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.paymentInfo.accountNumber">Account Number</span></dt>
+                <dd>
+                    <span>{{ paymentInfo.accountNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.paymentInfo.cardNumber">Card Number</span></dt>
+                <dd>
+                    <span>{{ paymentInfo.cardNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="ePaymentApp.paymentInfo.customer">Customer</span></dt>
+                <dd>
+                    <div *ngIf="paymentInfo.customer">
+                        <a [routerLink]="['/customer', paymentInfo.customer?.id, 'view']">{{ paymentInfo.customer?.phoneNumber }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/payment-info', paymentInfo.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -85,32 +85,17 @@ public class InvoiceQueryService extends QueryService<Invoice> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getId(), Invoice_.id));
             }
+            if (criteria.getInvoiceNumber() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getInvoiceNumber(), Invoice_.invoiceNumber));
+            }
             if (criteria.getDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getDate(), Invoice_.date));
-            }
-            if (criteria.getUniqueNumberCustomer() != null) {
-                specification = specification.and(buildSpecification(criteria.getUniqueNumberCustomer(), Invoice_.uniqueNumberCustomer));
-            }
-            if (criteria.getNameOfTheCardOwner() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getNameOfTheCardOwner(), Invoice_.nameOfTheCardOwner));
-            }
-            if (criteria.getCardExpirationDate() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getCardExpirationDate(), Invoice_.cardExpirationDate));
             }
             if (criteria.getVerificationNumber() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getVerificationNumber(), Invoice_.verificationNumber));
             }
-            if (criteria.getTransactionNumber() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getTransactionNumber(), Invoice_.transactionNumber));
-            }
-            if (criteria.getInvoiceNumber() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getInvoiceNumber(), Invoice_.invoiceNumber));
-            }
             if (criteria.getUnitName() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getUnitName(), Invoice_.unitName));
-            }
-            if (criteria.getCustomerName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getCustomerName(), Invoice_.customerName));
             }
             if (criteria.getAmountOfTheInvoice() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getAmountOfTheInvoice(), Invoice_.amountOfTheInvoice));
@@ -118,9 +103,9 @@ public class InvoiceQueryService extends QueryService<Invoice> {
             if (criteria.getAmountPaid() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getAmountPaid(), Invoice_.amountPaid));
             }
-            if (criteria.getCardId() != null) {
-                specification = specification.and(buildSpecification(criteria.getCardId(),
-                    root -> root.join(Invoice_.card, JoinType.LEFT).get(Card_.id)));
+            if (criteria.getTransactionId() != null) {
+                specification = specification.and(buildSpecification(criteria.getTransactionId(),
+                    root -> root.join(Invoice_.transaction, JoinType.LEFT).get(Transaction_.id)));
             }
             if (criteria.getCustomerId() != null) {
                 specification = specification.and(buildSpecification(criteria.getCustomerId(),

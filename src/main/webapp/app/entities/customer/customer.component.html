@@ -24,6 +24,7 @@
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="phoneNumber"><span jhiTranslate="ePaymentApp.customer.phoneNumber">Phone Number</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="nationalId"><span jhiTranslate="ePaymentApp.customer.nationalId">National Id</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="user.login"><span jhiTranslate="ePaymentApp.customer.user">User</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
@@ -32,6 +33,7 @@
                 <tr *ngFor="let customer of customers ;trackBy: trackId">
                     <td><a [routerLink]="['/customer', customer.id, 'view']">{{ customer.id }}</a></td>
                     <td>{{ customer.phoneNumber }}</td>
+                    <td>{{ customer.nationalId }}</td>
                     <td>
                         {{ customer.user?.login }}
                     </td>

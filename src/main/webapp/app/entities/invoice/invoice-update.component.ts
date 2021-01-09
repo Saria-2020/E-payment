@@ -10,12 +10,12 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IInvoice, Invoice } from 'app/shared/model/invoice.model';
 import { InvoiceService } from './invoice.service';
-import { ICard } from 'app/shared/model/card.model';
-import { CardService } from 'app/entities/card/card.service';
+import { ITransaction } from 'app/shared/model/transaction.model';
+import { TransactionService } from 'app/entities/transaction/transaction.service';
 import { ICustomer } from 'app/shared/model/customer.model';
 import { CustomerService } from 'app/entities/customer/customer.service';
 
-type SelectableEntity = ICard | ICustomer;
+type SelectableEntity = ITransaction | ICustomer;
 
 @Component({
   selector: 'jhi-invoice-update',
@@ -23,29 +23,24 @@ type SelectableEntity = ICard | ICustomer;
 })
 export class InvoiceUpdateComponent implements OnInit {
   isSaving = false;
-  cards: ICard[] = [];
+  transactions: ITransaction[] = [];
   customers: ICustomer[] = [];
 
   editForm = this.fb.group({
     id: [],
-    date: [],
-    uniqueNumberCustomer: [],
-    nameOfTheCardOwner: [],
-    cardExpirationDate: [],
-    verificationNumber: [],
-    transactionNumber: [],
     invoiceNumber: [],
+    date: [],
+    verificationNumber: [],
     unitName: [],
-    customerName: [],
     amountOfTheInvoice: [],
     amountPaid: [],
-    card: [],
+    transaction: [],
     customer: [],
   });
 
   constructor(
     protected invoiceService: InvoiceService,
-    protected cardService: CardService,
+    protected transactionService: TransactionService,
     protected customerService: CustomerService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -60,25 +55,25 @@ export class InvoiceUpdateComponent implements OnInit {
 
       this.updateForm(invoice);
 
-      this.cardService
+      this.transactionService
         .query({ 'invoiceId.specified': 'false' })
         .pipe(
-          map((res: HttpResponse<ICard[]>) => {
+          map((res: HttpResponse<ITransaction[]>) => {
             return res.body || [];
           })
         )
-        .subscribe((resBody: ICard[]) => {
-          if (!invoice.card || !invoice.card.id) {
-            this.cards = resBody;
+        .subscribe((resBody: ITransaction[]) => {
+          if (!invoice.transaction || !invoice.transaction.id) {
+            this.transactions = resBody;
           } else {
-            this.cardService
-              .find(invoice.card.id)
+            this.transactionService
+              .find(invoice.transaction.id)
               .pipe(
-                map((subRes: HttpResponse<ICard>) => {
+                map((subRes: HttpResponse<ITransaction>) => {
                   return subRes.body ? [subRes.body].concat(resBody) : resBody;
                 })
               )
-              .subscribe((concatRes: ICard[]) => (this.cards = concatRes));
+              .subscribe((concatRes: ITransaction[]) => (this.transactions = concatRes));
           }
         });
 
@@ -89,18 +84,13 @@ export class InvoiceUpdateComponent implements OnInit {
   updateForm(invoice: IInvoice): void {
     this.editForm.patchValue({
       id: invoice.id,
-      date: invoice.date ? invoice.date.format(DATE_TIME_FORMAT) : null,
-      uniqueNumberCustomer: invoice.uniqueNumberCustomer,
-      nameOfTheCardOwner: invoice.nameOfTheCardOwner,
-      cardExpirationDate: invoice.cardExpirationDate,
-      verificationNumber: invoice.verificationNumber,
-      transactionNumber: invoice.transactionNumber,
       invoiceNumber: invoice.invoiceNumber,
+      date: invoice.date ? invoice.date.format(DATE_TIME_FORMAT) : null,
+      verificationNumber: invoice.verificationNumber,
       unitName: invoice.unitName,
-      customerName: invoice.customerName,
       amountOfTheInvoice: invoice.amountOfTheInvoice,
       amountPaid: invoice.amountPaid,
-      card: invoice.card,
+      transaction: invoice.transaction,
       customer: invoice.customer,
     });
   }
@@ -123,18 +113,13 @@ export class InvoiceUpdateComponent implements OnInit {
     return {
       ...new Invoice(),
       id: this.editForm.get(['id'])!.value,
-      date: this.editForm.get(['date'])!.value ? moment(this.editForm.get(['date'])!.value, DATE_TIME_FORMAT) : undefined,
-      uniqueNumberCustomer: this.editForm.get(['uniqueNumberCustomer'])!.value,
-      nameOfTheCardOwner: this.editForm.get(['nameOfTheCardOwner'])!.value,
-      cardExpirationDate: this.editForm.get(['cardExpirationDate'])!.value,
-      verificationNumber: this.editForm.get(['verificationNumber'])!.value,
-      transactionNumber: this.editForm.get(['transactionNumber'])!.value,
       invoiceNumber: this.editForm.get(['invoiceNumber'])!.value,
+      date: this.editForm.get(['date'])!.value ? moment(this.editForm.get(['date'])!.value, DATE_TIME_FORMAT) : undefined,
+      verificationNumber: this.editForm.get(['verificationNumber'])!.value,
       unitName: this.editForm.get(['unitName'])!.value,
-      customerName: this.editForm.get(['customerName'])!.value,
       amountOfTheInvoice: this.editForm.get(['amountOfTheInvoice'])!.value,
       amountPaid: this.editForm.get(['amountPaid'])!.value,
-      card: this.editForm.get(['card'])!.value,
+      transaction: this.editForm.get(['transaction'])!.value,
       customer: this.editForm.get(['customer'])!.value,
     };
   }

@@ -44,16 +44,16 @@
                 <dd>
                     <span>{{ activityInformation.descriptionOfTheFeatures }}</span>
                 </dd>
+                <dt><span jhiTranslate="ePaymentApp.activityInformation.customer">Customer</span></dt>
+                <dd>
+                    <div *ngIf="activityInformation.customer">
+                        <a [routerLink]="['/customer', activityInformation.customer?.id, 'view']">{{ activityInformation.customer?.phoneNumber }}</a>
+                    </div>
+                </dd>
                 <dt><span jhiTranslate="ePaymentApp.activityInformation.category">Category</span></dt>
                 <dd>
                     <div *ngIf="activityInformation.category">
                         <a [routerLink]="['/category', activityInformation.category?.id, 'view']">{{ activityInformation.category?.name }}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="ePaymentApp.activityInformation.customer">Customer</span></dt>
-                <dd>
-                    <div *ngIf="activityInformation.customer">
-                        <a [routerLink]="['/customer', activityInformation.customer?.id, 'view']">{{ activityInformation.customer?.id }}</a>
                     </div>
                 </dd>
             </dl>

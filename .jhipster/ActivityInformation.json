@@ -41,26 +41,25 @@
   ],
   "relationships": [
     {
-      "relationshipType": "one-to-one",
-      "otherEntityName": "category",
-      "otherEntityRelationshipName": "activityInformation",
-      "relationshipName": "category",
-      "otherEntityField": "name",
-      "ownerSide": true
-    },
-    {
       "relationshipType": "many-to-one",
       "otherEntityName": "customer",
       "otherEntityRelationshipName": "activityInformation",
       "relationshipName": "customer",
-      "otherEntityField": "id"
+      "otherEntityField": "phoneNumber"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "category",
+      "otherEntityRelationshipName": "activityInformation",
+      "relationshipName": "category",
+      "otherEntityField": "name"
     }
   ],
   "changelogDate": "20201123220449",
   "entityTableName": "activity_information",
   "dto": "no",
   "pagination": "pagination",
-  "service": "serviceImpl",
+  "service": "serviceClass",
   "jpaMetamodelFiltering": true,
   "fluentMethods": true,
   "readOnly": false,

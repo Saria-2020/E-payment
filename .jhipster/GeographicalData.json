@@ -36,14 +36,14 @@
       "otherEntityName": "customer",
       "otherEntityRelationshipName": "geographicalData",
       "relationshipName": "customer",
-      "otherEntityField": "id"
+      "otherEntityField": "phoneNumber"
     }
   ],
   "changelogDate": "20201123220349",
   "entityTableName": "geographical_data",
   "dto": "no",
   "pagination": "pagination",
-  "service": "serviceImpl",
+  "service": "serviceClass",
   "jpaMetamodelFiltering": true,
   "fluentMethods": true,
   "readOnly": false,

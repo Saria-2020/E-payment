@@ -28,12 +28,15 @@ public class CategoryCriteria implements Serializable, Criteria {
 
     private StringFilter name;
 
+    private LongFilter activityInformationId;
+
     public CategoryCriteria() {
     }
 
     public CategoryCriteria(CategoryCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
         this.name = other.name == null ? null : other.name.copy();
+        this.activityInformationId = other.activityInformationId == null ? null : other.activityInformationId.copy();
     }
 
     @Override
@@ -57,6 +60,14 @@ public class CategoryCriteria implements Serializable, Criteria {
         this.name = name;
     }
 
+    public LongFilter getActivityInformationId() {
+        return activityInformationId;
+    }
+
+    public void setActivityInformationId(LongFilter activityInformationId) {
+        this.activityInformationId = activityInformationId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -69,14 +80,16 @@ public class CategoryCriteria implements Serializable, Criteria {
         final CategoryCriteria that = (CategoryCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(name, that.name);
+            Objects.equals(name, that.name) &&
+            Objects.equals(activityInformationId, that.activityInformationId);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
         id,
-        name
+        name,
+        activityInformationId
         );
     }
 
@@ -86,6 +99,7 @@ public class CategoryCriteria implements Serializable, Criteria {
         return "CategoryCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (name != null ? "name=" + name + ", " : "") +
+                (activityInformationId != null ? "activityInformationId=" + activityInformationId + ", " : "") +
             "}";
     }
 

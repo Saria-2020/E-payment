@@ -19,7 +19,7 @@
             <column name="name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="descrpition" type="${clobType}">
+            <column name="description" type="${clobType}">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -46,7 +46,7 @@
                   tableName="category">
             <column name="id" type="numeric"/>
             <column name="name" type="string"/>
-            <column name="descrpition" type="clob"/>
+            <column name="description" type="clob"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

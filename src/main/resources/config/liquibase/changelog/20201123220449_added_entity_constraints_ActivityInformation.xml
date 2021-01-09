@@ -8,17 +8,17 @@
     -->
     <changeSet id="20201123220449-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="category_id"
-                                 baseTableName="activity_information"
-                                 constraintName="fk_activity_information_category_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="category"/>
-
         <addForeignKeyConstraint baseColumnNames="customer_id"
                                  baseTableName="activity_information"
                                  constraintName="fk_activity_information_customer_id"
                                  referencedColumnNames="id"
                                  referencedTableName="customer"/>
+
+        <addForeignKeyConstraint baseColumnNames="category_id"
+                                 baseTableName="activity_information"
+                                 constraintName="fk_activity_information_category_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category"/>
 
     </changeSet>
 </databaseChangeLog>

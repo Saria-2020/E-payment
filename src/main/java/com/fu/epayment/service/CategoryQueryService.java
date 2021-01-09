@@ -88,6 +88,10 @@ public class CategoryQueryService extends QueryService<Category> {
             if (criteria.getName() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getName(), Category_.name));
             }
+            if (criteria.getActivityInformationId() != null) {
+                specification = specification.and(buildSpecification(criteria.getActivityInformationId(),
+                    root -> root.join(Category_.activityInformations, JoinType.LEFT).get(ActivityInformation_.id)));
+            }
         }
         return specification;
     }

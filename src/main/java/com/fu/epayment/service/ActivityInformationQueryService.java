@@ -109,13 +109,13 @@ public class ActivityInformationQueryService extends QueryService<ActivityInform
             if (criteria.getFeatures() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getFeatures(), ActivityInformation_.features));
             }
-            if (criteria.getCategoryId() != null) {
-                specification = specification.and(buildSpecification(criteria.getCategoryId(),
-                    root -> root.join(ActivityInformation_.category, JoinType.LEFT).get(Category_.id)));
-            }
             if (criteria.getCustomerId() != null) {
                 specification = specification.and(buildSpecification(criteria.getCustomerId(),
                     root -> root.join(ActivityInformation_.customer, JoinType.LEFT).get(Customer_.id)));
+            }
+            if (criteria.getCategoryId() != null) {
+                specification = specification.and(buildSpecification(criteria.getCategoryId(),
+                    root -> root.join(ActivityInformation_.category, JoinType.LEFT).get(Category_.id)));
             }
         }
         return specification;

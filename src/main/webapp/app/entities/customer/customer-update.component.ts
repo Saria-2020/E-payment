@@ -21,6 +21,7 @@ export class CustomerUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     phoneNumber: [],
+    nationalId: [],
     user: [],
   });
 
@@ -43,6 +44,7 @@ export class CustomerUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: customer.id,
       phoneNumber: customer.phoneNumber,
+      nationalId: customer.nationalId,
       user: customer.user,
     });
   }
@@ -66,6 +68,7 @@ export class CustomerUpdateComponent implements OnInit {
       ...new Customer(),
       id: this.editForm.get(['id'])!.value,
       phoneNumber: this.editForm.get(['phoneNumber'])!.value,
+      nationalId: this.editForm.get(['nationalId'])!.value,
       user: this.editForm.get(['user'])!.value,
     };
   }

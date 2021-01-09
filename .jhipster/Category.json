@@ -6,17 +6,24 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "descrpition",
+      "fieldName": "description",
       "fieldType": "byte[]",
       "fieldTypeBlobContent": "text"
     }
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "activityInformation",
+      "otherEntityRelationshipName": "category",
+      "relationshipName": "activityInformation"
+    }
+  ],
   "changelogDate": "20201123220549",
   "entityTableName": "category",
   "dto": "no",
   "pagination": "pagination",
-  "service": "serviceImpl",
+  "service": "serviceClass",
   "jpaMetamodelFiltering": true,
   "fluentMethods": true,
   "readOnly": false,

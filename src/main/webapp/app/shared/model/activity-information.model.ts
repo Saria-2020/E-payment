@@ -1,5 +1,5 @@
-import { ICategory } from 'app/shared/model/category.model';
 import { ICustomer } from 'app/shared/model/customer.model';
+import { ICategory } from 'app/shared/model/category.model';
 
 export interface IActivityInformation {
   id?: number;
@@ -12,8 +12,8 @@ export interface IActivityInformation {
   numberOfFloors?: string;
   features?: string;
   descriptionOfTheFeatures?: any;
-  category?: ICategory;
   customer?: ICustomer;
+  category?: ICategory;
 }
 
 export class ActivityInformation implements IActivityInformation {
@@ -28,7 +28,7 @@ export class ActivityInformation implements IActivityInformation {
     public numberOfFloors?: string,
     public features?: string,
     public descriptionOfTheFeatures?: any,
-    public category?: ICategory,
-    public customer?: ICustomer
+    public customer?: ICustomer,
+    public category?: ICategory
   ) {}
 }

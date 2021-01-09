@@ -28,15 +28,17 @@ public class CustomerCriteria implements Serializable, Criteria {
 
     private StringFilter phoneNumber;
 
+    private StringFilter nationalId;
+
     private LongFilter userId;
 
-    private LongFilter invoiceId;
+    private LongFilter invoicesId;
 
     private LongFilter activityInformationId;
 
     private LongFilter geographicalDataId;
 
-    private LongFilter cardId;
+    private LongFilter accountsId;
 
     public CustomerCriteria() {
     }
@@ -44,11 +46,12 @@ public class CustomerCriteria implements Serializable, Criteria {
     public CustomerCriteria(CustomerCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
         this.phoneNumber = other.phoneNumber == null ? null : other.phoneNumber.copy();
+        this.nationalId = other.nationalId == null ? null : other.nationalId.copy();
         this.userId = other.userId == null ? null : other.userId.copy();
-        this.invoiceId = other.invoiceId == null ? null : other.invoiceId.copy();
+        this.invoicesId = other.invoicesId == null ? null : other.invoicesId.copy();
         this.activityInformationId = other.activityInformationId == null ? null : other.activityInformationId.copy();
         this.geographicalDataId = other.geographicalDataId == null ? null : other.geographicalDataId.copy();
-        this.cardId = other.cardId == null ? null : other.cardId.copy();
+        this.accountsId = other.accountsId == null ? null : other.accountsId.copy();
     }
 
     @Override
@@ -72,6 +75,14 @@ public class CustomerCriteria implements Serializable, Criteria {
         this.phoneNumber = phoneNumber;
     }
 
+    public StringFilter getNationalId() {
+        return nationalId;
+    }
+
+    public void setNationalId(StringFilter nationalId) {
+        this.nationalId = nationalId;
+    }
+
     public LongFilter getUserId() {
         return userId;
     }
@@ -80,12 +91,12 @@ public class CustomerCriteria implements Serializable, Criteria {
         this.userId = userId;
     }
 
-    public LongFilter getInvoiceId() {
-        return invoiceId;
+    public LongFilter getInvoicesId() {
+        return invoicesId;
     }
 
-    public void setInvoiceId(LongFilter invoiceId) {
-        this.invoiceId = invoiceId;
+    public void setInvoicesId(LongFilter invoicesId) {
+        this.invoicesId = invoicesId;
     }
 
     public LongFilter getActivityInformationId() {
@@ -104,12 +115,12 @@ public class CustomerCriteria implements Serializable, Criteria {
         this.geographicalDataId = geographicalDataId;
     }
 
-    public LongFilter getCardId() {
-        return cardId;
+    public LongFilter getAccountsId() {
+        return accountsId;
     }
 
-    public void setCardId(LongFilter cardId) {
-        this.cardId = cardId;
+    public void setAccountsId(LongFilter accountsId) {
+        this.accountsId = accountsId;
     }
 
 
@@ -125,11 +136,12 @@ public class CustomerCriteria implements Serializable, Criteria {
         return
             Objects.equals(id, that.id) &&
             Objects.equals(phoneNumber, that.phoneNumber) &&
+            Objects.equals(nationalId, that.nationalId) &&
             Objects.equals(userId, that.userId) &&
-            Objects.equals(invoiceId, that.invoiceId) &&
+            Objects.equals(invoicesId, that.invoicesId) &&
             Objects.equals(activityInformationId, that.activityInformationId) &&
             Objects.equals(geographicalDataId, that.geographicalDataId) &&
-            Objects.equals(cardId, that.cardId);
+            Objects.equals(accountsId, that.accountsId);
     }
 
     @Override
@@ -137,11 +149,12 @@ public class CustomerCriteria implements Serializable, Criteria {
         return Objects.hash(
         id,
         phoneNumber,
+        nationalId,
         userId,
-        invoiceId,
+        invoicesId,
         activityInformationId,
         geographicalDataId,
-        cardId
+        accountsId
         );
     }
 
@@ -151,11 +164,12 @@ public class CustomerCriteria implements Serializable, Criteria {
         return "CustomerCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (phoneNumber != null ? "phoneNumber=" + phoneNumber + ", " : "") +
+                (nationalId != null ? "nationalId=" + nationalId + ", " : "") +
                 (userId != null ? "userId=" + userId + ", " : "") +
-                (invoiceId != null ? "invoiceId=" + invoiceId + ", " : "") +
+                (invoicesId != null ? "invoicesId=" + invoicesId + ", " : "") +
                 (activityInformationId != null ? "activityInformationId=" + activityInformationId + ", " : "") +
                 (geographicalDataId != null ? "geographicalDataId=" + geographicalDataId + ", " : "") +
-                (cardId != null ? "cardId=" + cardId + ", " : "") +
+                (accountsId != null ? "accountsId=" + accountsId + ", " : "") +
             "}";
     }
 

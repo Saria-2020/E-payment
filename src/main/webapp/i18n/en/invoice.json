@@ -16,18 +16,13 @@
       "detail": {
         "title": "Invoice"
       },
-      "date": "Date",
-      "uniqueNumberCustomer": "Unique Number Customer",
-      "nameOfTheCardOwner": "Name Of The Card Owner",
-      "cardExpirationDate": "Card Expiration Date",
-      "verificationNumber": "Verification Number",
-      "transactionNumber": "Transaction Number",
       "invoiceNumber": "Invoice Number",
+      "date": "Date",
+      "verificationNumber": "Verification Number",
       "unitName": "Unit Name",
-      "customerName": "Customer Name",
       "amountOfTheInvoice": "Amount Of The Invoice",
       "amountPaid": "Amount Paid",
-      "card": "Card",
+      "transaction": "Transaction",
       "customer": "Customer"
     }
   }

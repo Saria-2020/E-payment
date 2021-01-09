@@ -32,8 +32,8 @@
                     <th scope="col"  jhiSortBy="numberOfFloors"><span jhiTranslate="ePaymentApp.activityInformation.numberOfFloors">Number Of Floors</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="features"><span jhiTranslate="ePaymentApp.activityInformation.features">Features</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="descriptionOfTheFeatures"><span jhiTranslate="ePaymentApp.activityInformation.descriptionOfTheFeatures">Description Of The Features</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="customer.phoneNumber"><span jhiTranslate="ePaymentApp.activityInformation.customer">Customer</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="category.name"><span jhiTranslate="ePaymentApp.activityInformation.category">Category</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="customer.id"><span jhiTranslate="ePaymentApp.activityInformation.customer">Customer</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -50,13 +50,13 @@
                     <td>{{ activityInformation.features }}</td>
                     <td>{{ activityInformation.descriptionOfTheFeatures }}</td>
                     <td>
-                        <div *ngIf="activityInformation.category">
-                            <a [routerLink]="['/category', activityInformation.category?.id, 'view']" >{{ activityInformation.category?.name }}</a>
+                        <div *ngIf="activityInformation.customer">
+                            <a [routerLink]="['/customer', activityInformation.customer?.id, 'view']" >{{ activityInformation.customer?.phoneNumber }}</a>
                         </div>
                     </td>
                     <td>
-                        <div *ngIf="activityInformation.customer">
-                            <a [routerLink]="['/customer', activityInformation.customer?.id, 'view']" >{{ activityInformation.customer?.id }}</a>
+                        <div *ngIf="activityInformation.category">
+                            <a [routerLink]="['/category', activityInformation.category?.id, 'view']" >{{ activityInformation.category?.name }}</a>
                         </div>
                     </td>
                     <td class="text-right">

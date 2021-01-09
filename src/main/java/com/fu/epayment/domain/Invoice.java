@@ -3,13 +3,11 @@ package com.fu.epayment.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.time.ZonedDateTime;
-import java.util.UUID;
+import java.time.Instant;
 
 /**
  * A Invoice.
@@ -25,33 +23,17 @@ public class Invoice implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "invoice_number")
+    private String invoiceNumber;
+
     @Column(name = "date")
-    private ZonedDateTime date;
-
-    @Type(type = "uuid-char")
-    @Column(name = "unique_number_customer", length = 36)
-    private UUID uniqueNumberCustomer;
-
-    @Column(name = "name_of_the_card_owner")
-    private String nameOfTheCardOwner;
-
-    @Column(name = "card_expiration_date")
-    private String cardExpirationDate;
+    private Instant date;
 
     @Column(name = "verification_number")
     private String verificationNumber;
 
-    @Column(name = "transaction_number")
-    private String transactionNumber;
-
-    @Column(name = "invoice_number")
-    private String invoiceNumber;
-
     @Column(name = "unit_name")
     private String unitName;
-
-    @Column(name = "customer_name")
-    private String customerName;
 
     @Column(name = "amount_of_the_invoice")
     private String amountOfTheInvoice;
@@ -61,7 +43,7 @@ public class Invoice implements Serializable {
 
     @OneToOne
     @JoinColumn(unique = true)
-    private Card card;
+    private Transaction transaction;
 
     @ManyToOne
     @JsonIgnoreProperties(value = "invoices", allowSetters = true)
@@ -74,84 +56,6 @@ public class Invoice implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public ZonedDateTime getDate() {
-        return date;
-    }
-
-    public Invoice date(ZonedDateTime date) {
-        this.date = date;
-        return this;
-    }
-
-    public void setDate(ZonedDateTime date) {
-        this.date = date;
-    }
-
-    public UUID getUniqueNumberCustomer() {
-        return uniqueNumberCustomer;
-    }
-
-    public Invoice uniqueNumberCustomer(UUID uniqueNumberCustomer) {
-        this.uniqueNumberCustomer = uniqueNumberCustomer;
-        return this;
-    }
-
-    public void setUniqueNumberCustomer(UUID uniqueNumberCustomer) {
-        this.uniqueNumberCustomer = uniqueNumberCustomer;
-    }
-
-    public String getNameOfTheCardOwner() {
-        return nameOfTheCardOwner;
-    }
-
-    public Invoice nameOfTheCardOwner(String nameOfTheCardOwner) {
-        this.nameOfTheCardOwner = nameOfTheCardOwner;
-        return this;
-    }
-
-    public void setNameOfTheCardOwner(String nameOfTheCardOwner) {
-        this.nameOfTheCardOwner = nameOfTheCardOwner;
-    }
-
-    public String getCardExpirationDate() {
-        return cardExpirationDate;
-    }
-
-    public Invoice cardExpirationDate(String cardExpirationDate) {
-        this.cardExpirationDate = cardExpirationDate;
-        return this;
-    }
-
-    public void setCardExpirationDate(String cardExpirationDate) {
-        this.cardExpirationDate = cardExpirationDate;
-    }
-
-    public String getVerificationNumber() {
-        return verificationNumber;
-    }
-
-    public Invoice verificationNumber(String verificationNumber) {
-        this.verificationNumber = verificationNumber;
-        return this;
-    }
-
-    public void setVerificationNumber(String verificationNumber) {
-        this.verificationNumber = verificationNumber;
-    }
-
-    public String getTransactionNumber() {
-        return transactionNumber;
-    }
-
-    public Invoice transactionNumber(String transactionNumber) {
-        this.transactionNumber = transactionNumber;
-        return this;
-    }
-
-    public void setTransactionNumber(String transactionNumber) {
-        this.transactionNumber = transactionNumber;
     }
 
     public String getInvoiceNumber() {
@@ -167,6 +71,32 @@ public class Invoice implements Serializable {
         this.invoiceNumber = invoiceNumber;
     }
 
+    public Instant getDate() {
+        return date;
+    }
+
+    public Invoice date(Instant date) {
+        this.date = date;
+        return this;
+    }
+
+    public void setDate(Instant date) {
+        this.date = date;
+    }
+
+    public String getVerificationNumber() {
+        return verificationNumber;
+    }
+
+    public Invoice verificationNumber(String verificationNumber) {
+        this.verificationNumber = verificationNumber;
+        return this;
+    }
+
+    public void setVerificationNumber(String verificationNumber) {
+        this.verificationNumber = verificationNumber;
+    }
+
     public String getUnitName() {
         return unitName;
     }
@@ -178,19 +108,6 @@ public class Invoice implements Serializable {
 
     public void setUnitName(String unitName) {
         this.unitName = unitName;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public Invoice customerName(String customerName) {
-        this.customerName = customerName;
-        return this;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
     }
 
     public String getAmountOfTheInvoice() {
@@ -219,17 +136,17 @@ public class Invoice implements Serializable {
         this.amountPaid = amountPaid;
     }
 
-    public Card getCard() {
-        return card;
+    public Transaction getTransaction() {
+        return transaction;
     }
 
-    public Invoice card(Card card) {
-        this.card = card;
+    public Invoice transaction(Transaction transaction) {
+        this.transaction = transaction;
         return this;
     }
 
-    public void setCard(Card card) {
-        this.card = card;
+    public void setTransaction(Transaction transaction) {
+        this.transaction = transaction;
     }
 
     public Customer getCustomer() {
@@ -267,15 +184,10 @@ public class Invoice implements Serializable {
     public String toString() {
         return "Invoice{" +
             "id=" + getId() +
-            ", date='" + getDate() + "'" +
-            ", uniqueNumberCustomer='" + getUniqueNumberCustomer() + "'" +
-            ", nameOfTheCardOwner='" + getNameOfTheCardOwner() + "'" +
-            ", cardExpirationDate='" + getCardExpirationDate() + "'" +
-            ", verificationNumber='" + getVerificationNumber() + "'" +
-            ", transactionNumber='" + getTransactionNumber() + "'" +
             ", invoiceNumber='" + getInvoiceNumber() + "'" +
+            ", date='" + getDate() + "'" +
+            ", verificationNumber='" + getVerificationNumber() + "'" +
             ", unitName='" + getUnitName() + "'" +
-            ", customerName='" + getCustomerName() + "'" +
             ", amountOfTheInvoice='" + getAmountOfTheInvoice() + "'" +
             ", amountPaid='" + getAmountPaid() + "'" +
             "}";

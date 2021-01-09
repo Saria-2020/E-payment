@@ -17,7 +17,8 @@
         "title": "Category"
       },
       "name": "Name",
-      "descrpition": "Descrpition"
+      "description": "Description",
+      "activityInformation": "Activity Information"
     }
   }
 }

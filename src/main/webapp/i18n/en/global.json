@@ -13,6 +13,8 @@
         "activityInformation": "Activity Information",
         "category": "Category",
         "card": "Card",
+        "paymentInfo": "Payment Info",
+        "transaction": "Transaction",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

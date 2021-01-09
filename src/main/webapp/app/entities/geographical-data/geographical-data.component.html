@@ -30,7 +30,7 @@
                     <th scope="col"  jhiSortBy="realEstateNumber"><span jhiTranslate="ePaymentApp.geographicalData.realEstateNumber">Real Estate Number</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="activityNumber"><span jhiTranslate="ePaymentApp.geographicalData.activityNumber">Activity Number</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="areaOfTheRealEstate"><span jhiTranslate="ePaymentApp.geographicalData.areaOfTheRealEstate">Area Of The Real Estate</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="customer.id"><span jhiTranslate="ePaymentApp.geographicalData.customer">Customer</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="customer.phoneNumber"><span jhiTranslate="ePaymentApp.geographicalData.customer">Customer</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -46,7 +46,7 @@
                     <td>{{ geographicalData.areaOfTheRealEstate }}</td>
                     <td>
                         <div *ngIf="geographicalData.customer">
-                            <a [routerLink]="['/customer', geographicalData.customer?.id, 'view']" >{{ geographicalData.customer?.id }}</a>
+                            <a [routerLink]="['/customer', geographicalData.customer?.id, 'view']" >{{ geographicalData.customer?.phoneNumber }}</a>
                         </div>
                     </td>
                     <td class="text-right">

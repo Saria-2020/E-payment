@@ -16,31 +16,16 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="invoice_number" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="date" type="datetime">
-                <constraints nullable="true" />
-            </column>
-            <column name="unique_number_customer" type="${uuidType}">
-                <constraints nullable="true" />
-            </column>
-            <column name="name_of_the_card_owner" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="card_expiration_date" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="verification_number" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="transaction_number" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="invoice_number" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <column name="unit_name" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="customer_name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="amount_of_the_invoice" type="varchar(255)">
@@ -49,8 +34,8 @@
             <column name="amount_paid" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="card_id" type="bigint">
-                <constraints unique="true" nullable="true" uniqueConstraintName="ux_invoice_card_id" />
+            <column name="transaction_id" type="bigint">
+                <constraints unique="true" nullable="true" uniqueConstraintName="ux_invoice_transaction_id" />
             </column>
             <column name="customer_id" type="bigint">
                 <constraints nullable="true" />
@@ -79,15 +64,10 @@
                   separator=";"
                   tableName="invoice">
             <column name="id" type="numeric"/>
-            <column name="date" type="datetime"/>
-            <column name="unique_number_customer" type="string"/>
-            <column name="name_of_the_card_owner" type="string"/>
-            <column name="card_expiration_date" type="string"/>
-            <column name="verification_number" type="string"/>
-            <column name="transaction_number" type="string"/>
             <column name="invoice_number" type="string"/>
+            <column name="date" type="datetime"/>
+            <column name="verification_number" type="string"/>
             <column name="unit_name" type="string"/>
-            <column name="customer_name" type="string"/>
             <column name="amount_of_the_invoice" type="string"/>
             <column name="amount_paid" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->

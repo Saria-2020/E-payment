@@ -1,7 +1,6 @@
 <nav class="navbar navbar-dark navbar-expand-md bg-dark">
 
         <span jhiTranslate="global.title" class="navbar-title">EPayment</span> <span class="navbar-version">{{ version }}</span>
-    </a>
     <a class="navbar-toggler d-lg-none" href="javascript:void(0);" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNavbar()">
         <fa-icon icon="bars"></fa-icon>
     </a>
@@ -59,9 +58,9 @@
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" routerLink="card" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="transaction" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                            <span jhiTranslate="global.menu.entities.card">Card</span>
+                            <span jhiTranslate="global.menu.entities.transaction">Transaction</span>
                         </a>
                     </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->

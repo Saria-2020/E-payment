@@ -20,14 +20,18 @@ public class Customer implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    @Column(name = "national_id")
+    private String nationalId;
+
     @OneToOne
-    @JoinColumn(unique = true)
+
+    @MapsId
+    @JoinColumn(name = "id")
     private User user;
 
     @OneToMany(mappedBy = "customer")
@@ -44,7 +48,7 @@ public class Customer implements Serializable {
 
     @OneToMany(mappedBy = "customer")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<Card> cards = new HashSet<>();
+    private Set<PaymentInfo> accounts = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -66,6 +70,19 @@ public class Customer implements Serializable {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getNationalId() {
+        return nationalId;
+    }
+
+    public Customer nationalId(String nationalId) {
+        this.nationalId = nationalId;
+        return this;
+    }
+
+    public void setNationalId(String nationalId) {
+        this.nationalId = nationalId;
     }
 
     public User getUser() {
@@ -90,13 +107,13 @@ public class Customer implements Serializable {
         return this;
     }
 
-    public Customer addInvoice(Invoice invoice) {
+    public Customer addInvoices(Invoice invoice) {
         this.invoices.add(invoice);
         invoice.setCustomer(this);
         return this;
     }
 
-    public Customer removeInvoice(Invoice invoice) {
+    public Customer removeInvoices(Invoice invoice) {
         this.invoices.remove(invoice);
         invoice.setCustomer(null);
         return this;
@@ -156,29 +173,29 @@ public class Customer implements Serializable {
         this.geographicalData = geographicalData;
     }
 
-    public Set<Card> getCards() {
-        return cards;
+    public Set<PaymentInfo> getAccounts() {
+        return accounts;
     }
 
-    public Customer cards(Set<Card> cards) {
-        this.cards = cards;
+    public Customer accounts(Set<PaymentInfo> paymentInfos) {
+        this.accounts = paymentInfos;
         return this;
     }
 
-    public Customer addCard(Card card) {
-        this.cards.add(card);
-        card.setCustomer(this);
+    public Customer addAccounts(PaymentInfo paymentInfo) {
+        this.accounts.add(paymentInfo);
+        paymentInfo.setCustomer(this);
         return this;
     }
 
-    public Customer removeCard(Card card) {
-        this.cards.remove(card);
-        card.setCustomer(null);
+    public Customer removeAccounts(PaymentInfo paymentInfo) {
+        this.accounts.remove(paymentInfo);
+        paymentInfo.setCustomer(null);
         return this;
     }
 
-    public void setCards(Set<Card> cards) {
-        this.cards = cards;
+    public void setAccounts(Set<PaymentInfo> paymentInfos) {
+        this.accounts = paymentInfos;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -204,6 +221,7 @@ public class Customer implements Serializable {
         return "Customer{" +
             "id=" + getId() +
             ", phoneNumber='" + getPhoneNumber() + "'" +
+            ", nationalId='" + getNationalId() + "'" +
             "}";
     }
 }

@@ -4,18 +4,17 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
 
 import { IActivityInformation, ActivityInformation } from 'app/shared/model/activity-information.model';
 import { ActivityInformationService } from './activity-information.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
-import { ICategory } from 'app/shared/model/category.model';
-import { CategoryService } from 'app/entities/category/category.service';
 import { ICustomer } from 'app/shared/model/customer.model';
 import { CustomerService } from 'app/entities/customer/customer.service';
+import { ICategory } from 'app/shared/model/category.model';
+import { CategoryService } from 'app/entities/category/category.service';
 
-type SelectableEntity = ICategory | ICustomer;
+type SelectableEntity = ICustomer | ICategory;
 
 @Component({
   selector: 'jhi-activity-information-update',
@@ -23,8 +22,8 @@ type SelectableEntity = ICategory | ICustomer;
 })
 export class ActivityInformationUpdateComponent implements OnInit {
   isSaving = false;
-  categories: ICategory[] = [];
   customers: ICustomer[] = [];
+  categories: ICategory[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -37,16 +36,16 @@ export class ActivityInformationUpdateComponent implements OnInit {
     numberOfFloors: [],
     features: [],
     descriptionOfTheFeatures: [],
-    category: [],
     customer: [],
+    category: [],
   });
 
   constructor(
     protected dataUtils: JhiDataUtils,
     protected eventManager: JhiEventManager,
     protected activityInformationService: ActivityInformationService,
-    protected categoryService: CategoryService,
     protected customerService: CustomerService,
+    protected categoryService: CategoryService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -55,29 +54,9 @@ export class ActivityInformationUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ activityInformation }) => {
       this.updateForm(activityInformation);
 
-      this.categoryService
-        .query({ 'activityInformationId.specified': 'false' })
-        .pipe(
-          map((res: HttpResponse<ICategory[]>) => {
-            return res.body || [];
-          })
-        )
-        .subscribe((resBody: ICategory[]) => {
-          if (!activityInformation.category || !activityInformation.category.id) {
-            this.categories = resBody;
-          } else {
-            this.categoryService
-              .find(activityInformation.category.id)
-              .pipe(
-                map((subRes: HttpResponse<ICategory>) => {
-                  return subRes.body ? [subRes.body].concat(resBody) : resBody;
-                })
-              )
-              .subscribe((concatRes: ICategory[]) => (this.categories = concatRes));
-          }
-        });
-
       this.customerService.query().subscribe((res: HttpResponse<ICustomer[]>) => (this.customers = res.body || []));
+
+      this.categoryService.query().subscribe((res: HttpResponse<ICategory[]>) => (this.categories = res.body || []));
     });
   }
 
@@ -93,8 +72,8 @@ export class ActivityInformationUpdateComponent implements OnInit {
       numberOfFloors: activityInformation.numberOfFloors,
       features: activityInformation.features,
       descriptionOfTheFeatures: activityInformation.descriptionOfTheFeatures,
-      category: activityInformation.category,
       customer: activityInformation.customer,
+      category: activityInformation.category,
     });
   }
 
@@ -141,8 +120,8 @@ export class ActivityInformationUpdateComponent implements OnInit {
       numberOfFloors: this.editForm.get(['numberOfFloors'])!.value,
       features: this.editForm.get(['features'])!.value,
       descriptionOfTheFeatures: this.editForm.get(['descriptionOfTheFeatures'])!.value,
-      category: this.editForm.get(['category'])!.value,
       customer: this.editForm.get(['customer'])!.value,
+      category: this.editForm.get(['category'])!.value,
     };
   }
 

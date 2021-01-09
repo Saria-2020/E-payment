@@ -1,16 +1,35 @@
 package com.fu.epayment.service;
 
 import com.fu.epayment.domain.Customer;
+import com.fu.epayment.repository.CustomerRepository;
+import com.fu.epayment.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 /**
- * Service Interface for managing {@link Customer}.
+ * Service Implementation for managing {@link Customer}.
  */
-public interface CustomerService {
+@Service
+@Transactional
+public class CustomerService {
+
+    private final Logger log = LoggerFactory.getLogger(CustomerService.class);
+
+    private final CustomerRepository customerRepository;
+
+    private final UserRepository userRepository;
+
+    public CustomerService(CustomerRepository customerRepository, UserRepository userRepository) {
+        this.customerRepository = customerRepository;
+        this.userRepository = userRepository;
+    }
 
     /**
      * Save a customer.
@@ -18,7 +37,12 @@ public interface CustomerService {
      * @param customer the entity to save.
      * @return the persisted entity.
      */
-    Customer save(Customer customer);
+    public Customer save(Customer customer) {
+        log.debug("Request to save Customer : {}", customer);
+        Long userId = customer.getUser().getId();
+        userRepository.findById(userId).ifPresent(customer::user);
+        return customerRepository.save(customer);
+    }
 
     /**
      * Get all the customers.
@@ -26,21 +50,32 @@ public interface CustomerService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    Page<Customer> findAll(Pageable pageable);
+    @Transactional(readOnly = true)
+    public Page<Customer> findAll(Pageable pageable) {
+        log.debug("Request to get all Customers");
+        return customerRepository.findAll(pageable);
+    }
 
 
     /**
-     * Get the "id" customer.
+     * Get one customer by id.
      *
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<Customer> findOne(Long id);
+    @Transactional(readOnly = true)
+    public Optional<Customer> findOne(Long id) {
+        log.debug("Request to get Customer : {}", id);
+        return customerRepository.findById(id);
+    }
 
     /**
-     * Delete the "id" customer.
+     * Delete the customer by id.
      *
      * @param id the id of the entity.
      */
-    void delete(Long id);
+    public void delete(Long id) {
+        log.debug("Request to delete Customer : {}", id);
+        customerRepository.deleteById(id);
+    }
 }

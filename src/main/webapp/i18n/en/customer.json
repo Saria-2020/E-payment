@@ -17,11 +17,12 @@
         "title": "Customer"
       },
       "phoneNumber": "Phone Number",
+      "nationalId": "National Id",
       "user": "User",
-      "invoice": "Invoice",
+      "invoices": "Invoices",
       "activityInformation": "Activity Information",
       "geographicalData": "Geographical Data",
-      "card": "Card"
+      "accounts": "Accounts"
     }
   }
 }

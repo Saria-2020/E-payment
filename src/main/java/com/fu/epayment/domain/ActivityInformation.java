@@ -50,13 +50,13 @@ public class ActivityInformation implements Serializable {
     @Column(name = "description_of_the_features")
     private String descriptionOfTheFeatures;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Category category;
-
     @ManyToOne
     @JsonIgnoreProperties(value = "activityInformations", allowSetters = true)
     private Customer customer;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "activityInformations", allowSetters = true)
+    private Category category;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -184,19 +184,6 @@ public class ActivityInformation implements Serializable {
         this.descriptionOfTheFeatures = descriptionOfTheFeatures;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public ActivityInformation category(Category category) {
-        this.category = category;
-        return this;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
     public Customer getCustomer() {
         return customer;
     }
@@ -208,6 +195,19 @@ public class ActivityInformation implements Serializable {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public ActivityInformation category(Category category) {
+        this.category = category;
+        return this;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

@@ -88,12 +88,15 @@ public class CustomerQueryService extends QueryService<Customer> {
             if (criteria.getPhoneNumber() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getPhoneNumber(), Customer_.phoneNumber));
             }
+            if (criteria.getNationalId() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getNationalId(), Customer_.nationalId));
+            }
             if (criteria.getUserId() != null) {
                 specification = specification.and(buildSpecification(criteria.getUserId(),
                     root -> root.join(Customer_.user, JoinType.LEFT).get(User_.id)));
             }
-            if (criteria.getInvoiceId() != null) {
-                specification = specification.and(buildSpecification(criteria.getInvoiceId(),
+            if (criteria.getInvoicesId() != null) {
+                specification = specification.and(buildSpecification(criteria.getInvoicesId(),
                     root -> root.join(Customer_.invoices, JoinType.LEFT).get(Invoice_.id)));
             }
             if (criteria.getActivityInformationId() != null) {
@@ -104,9 +107,9 @@ public class CustomerQueryService extends QueryService<Customer> {
                 specification = specification.and(buildSpecification(criteria.getGeographicalDataId(),
                     root -> root.join(Customer_.geographicalData, JoinType.LEFT).get(GeographicalData_.id)));
             }
-            if (criteria.getCardId() != null) {
-                specification = specification.and(buildSpecification(criteria.getCardId(),
-                    root -> root.join(Customer_.cards, JoinType.LEFT).get(Card_.id)));
+            if (criteria.getAccountsId() != null) {
+                specification = specification.and(buildSpecification(criteria.getAccountsId(),
+                    root -> root.join(Customer_.accounts, JoinType.LEFT).get(PaymentInfo_.id)));
             }
         }
         return specification;

@@ -2,39 +2,19 @@
   "name": "Invoice",
   "fields": [
     {
+      "fieldName": "invoiceNumber",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "date",
-      "fieldType": "ZonedDateTime"
-    },
-    {
-      "fieldName": "uniqueNumberCustomer",
-      "fieldType": "UUID"
-    },
-    {
-      "fieldName": "nameOfTheCardOwner",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "cardExpirationDate",
-      "fieldType": "String"
+      "fieldType": "Instant"
     },
     {
       "fieldName": "verificationNumber",
       "fieldType": "String"
     },
     {
-      "fieldName": "transactionNumber",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "invoiceNumber",
-      "fieldType": "String"
-    },
-    {
       "fieldName": "unitName",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "customerName",
       "fieldType": "String"
     },
     {
@@ -49,25 +29,25 @@
   "relationships": [
     {
       "relationshipType": "one-to-one",
-      "otherEntityName": "card",
+      "otherEntityName": "transaction",
       "otherEntityRelationshipName": "invoice",
-      "relationshipName": "card",
-      "otherEntityField": "number",
+      "relationshipName": "transaction",
+      "otherEntityField": "name",
       "ownerSide": true
     },
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "customer",
-      "otherEntityRelationshipName": "invoice",
+      "otherEntityRelationshipName": "invoices",
       "relationshipName": "customer",
-      "otherEntityField": "id"
+      "otherEntityField": "phoneNumber"
     }
   ],
   "changelogDate": "20201123220249",
   "entityTableName": "invoice",
   "dto": "no",
   "pagination": "pagination",
-  "service": "serviceImpl",
+  "service": "serviceClass",
   "jpaMetamodelFiltering": true,
   "fluentMethods": true,
   "readOnly": false,

@@ -39,7 +39,7 @@
                 <dt><span jhiTranslate="ePaymentApp.geographicalData.customer">Customer</span></dt>
                 <dd>
                     <div *ngIf="geographicalData.customer">
-                        <a [routerLink]="['/customer', geographicalData.customer?.id, 'view']">{{ geographicalData.customer?.id }}</a>
+                        <a [routerLink]="['/customer', geographicalData.customer?.id, 'view']">{{ geographicalData.customer?.phoneNumber }}</a>
                     </div>
                 </dd>
             </dl>

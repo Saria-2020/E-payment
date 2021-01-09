@@ -4,6 +4,10 @@
     {
       "fieldName": "phoneNumber",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "nationalId",
+      "fieldType": "String"
     }
   ],
   "relationships": [
@@ -13,13 +17,14 @@
       "otherEntityRelationshipName": "customer",
       "relationshipName": "user",
       "otherEntityField": "login",
-      "ownerSide": true
+      "ownerSide": true,
+      "useJPADerivedIdentifier": true
     },
     {
       "relationshipType": "one-to-many",
       "otherEntityName": "invoice",
       "otherEntityRelationshipName": "customer",
-      "relationshipName": "invoice"
+      "relationshipName": "invoices"
     },
     {
       "relationshipType": "one-to-many",
@@ -35,16 +40,16 @@
     },
     {
       "relationshipType": "one-to-many",
-      "otherEntityName": "card",
+      "otherEntityName": "paymentInfo",
       "otherEntityRelationshipName": "customer",
-      "relationshipName": "card"
+      "relationshipName": "accounts"
     }
   ],
   "changelogDate": "20201123220149",
   "entityTableName": "customer",
   "dto": "no",
   "pagination": "pagination",
-  "service": "serviceImpl",
+  "service": "serviceClass",
   "jpaMetamodelFiltering": true,
   "fluentMethods": true,
   "readOnly": false,

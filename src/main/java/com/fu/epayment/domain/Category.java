@@ -6,6 +6,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A Category.
@@ -25,8 +27,12 @@ public class Category implements Serializable {
     private String name;
 
     @Lob
-    @Column(name = "descrpition")
-    private String descrpition;
+    @Column(name = "description")
+    private String description;
+
+    @OneToMany(mappedBy = "category")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    private Set<ActivityInformation> activityInformations = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -50,17 +56,42 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public String getDescrpition() {
-        return descrpition;
+    public String getDescription() {
+        return description;
     }
 
-    public Category descrpition(String descrpition) {
-        this.descrpition = descrpition;
+    public Category description(String description) {
+        this.description = description;
         return this;
     }
 
-    public void setDescrpition(String descrpition) {
-        this.descrpition = descrpition;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Set<ActivityInformation> getActivityInformations() {
+        return activityInformations;
+    }
+
+    public Category activityInformations(Set<ActivityInformation> activityInformations) {
+        this.activityInformations = activityInformations;
+        return this;
+    }
+
+    public Category addActivityInformation(ActivityInformation activityInformation) {
+        this.activityInformations.add(activityInformation);
+        activityInformation.setCategory(this);
+        return this;
+    }
+
+    public Category removeActivityInformation(ActivityInformation activityInformation) {
+        this.activityInformations.remove(activityInformation);
+        activityInformation.setCategory(null);
+        return this;
+    }
+
+    public void setActivityInformations(Set<ActivityInformation> activityInformations) {
+        this.activityInformations = activityInformations;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -86,7 +117,7 @@ public class Category implements Serializable {
         return "Category{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", descrpition='" + getDescrpition() + "'" +
+            ", description='" + getDescription() + "'" +
             "}";
     }
 }

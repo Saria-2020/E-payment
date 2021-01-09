@@ -3,21 +3,19 @@
 
 entity Customer {
   phoneNumber String,
+  nationalId String
 }
 
 
 entity Invoice {
- date ZonedDateTime
- uniqueNumberCustomer UUID,
- nameOfTheCardOwner String,
- cardExpirationDate String,
+ invoiceNumber String,
+ date Instant
  verificationNumber String,
- transactionNumber String,
- invoiceNumber String, 
  unitName String,
- customerName String, 
  amountOfTheInvoice String,
  amountPaid String
+ // Transaction
+ // Customer
 }
 
 entity GeographicalData {
@@ -28,8 +26,9 @@ entity GeographicalData {
  realEstateNumber String,
  activityNumber String,
  areaOfTheRealEstate String
+ // Customer
  }
- 
+
  entity ActivityInformation {
  name String,
  sector String,
@@ -40,33 +39,45 @@ entity GeographicalData {
  numberOfFloors String,
  features String,
  descriptionOfTheFeatures TextBlob
+ // Category
+ // Customer
  }
- 
+
  entity Category {
  	name String
-    descrpition TextBlob
+    description TextBlob
  }
- 
- entity Card{
- 	number String,
-    name String,
-    expDate String,
+
+ entity PaymentInfo {
+ 	name String,
+    accountNumber String,
+ 	cardNumber String,
+    // Customer
  }
- 
+
+ entity Transaction {
+    name String
+    uuid String
+    amount Double
+    dateTime Instant
+    paymentInfo String
+    // Invoice
+}
 
 relationship OneToOne {
-	Customer{user(login)} to User
-    ActivityInformation{category(name)} to Category
-    Invoice{card(number)} to Card
+	Customer{user(login)} to User with jpaDerivedIdentifier
+    Invoice{transaction(name)} to Transaction{invoice(invoiceNumber)}
 }
 
 relationship OneToMany {
-	Customer{invoice(uniqueNumberCustomer)} to Invoice
-    Customer to ActivityInformation
-    Customer to GeographicalData
-    Customer{card(number)} to Card{customer(phoneNumber)}
+	Customer{invoices(invoiceNumber)} to Invoice{customer(phoneNumber)}
+    Customer{activityInformation(name)} to ActivityInformation{customer(phoneNumber)}
+    Customer{GeographicalData(realEstateNumber)} to GeographicalData{customer(phoneNumber)}
+    Customer{accounts(name)} to PaymentInfo{customer(phoneNumber)}
+
+    Category{activityInformation(name)} to ActivityInformation{category(name)}
 }
 
 paginate * with pagination
-service * with serviceImpl
+service * with serviceClass
 filter *

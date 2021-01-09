@@ -25,8 +25,8 @@
       "numberOfFloors": "Number Of Floors",
       "features": "Features",
       "descriptionOfTheFeatures": "Description Of The Features",
-      "category": "Category",
-      "customer": "Customer"
+      "customer": "Customer",
+      "category": "Category"
     }
   }
 }
