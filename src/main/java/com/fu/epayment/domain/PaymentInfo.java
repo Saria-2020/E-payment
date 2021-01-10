@@ -33,6 +33,9 @@ public class PaymentInfo implements Serializable {
     @Column(name = "card_number")
     private String cardNumber;
 
+    @Column(name = "balance")
+    private Double balance;
+
     @OneToMany(mappedBy = "paymentInfo")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Transaction> transactions = new HashSet<>();
@@ -87,6 +90,19 @@ public class PaymentInfo implements Serializable {
 
     public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
+    }
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    public PaymentInfo balance(Double balance) {
+        this.balance = balance;
+        return this;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
     }
 
     public Set<Transaction> getTransactions() {
@@ -152,6 +168,7 @@ public class PaymentInfo implements Serializable {
             ", name='" + getName() + "'" +
             ", accountNumber='" + getAccountNumber() + "'" +
             ", cardNumber='" + getCardNumber() + "'" +
+            ", balance=" + getBalance() +
             "}";
     }
 }

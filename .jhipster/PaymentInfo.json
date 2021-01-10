@@ -12,6 +12,10 @@
     {
       "fieldName": "cardNumber",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "balance",
+      "fieldType": "Double"
     }
   ],
   "relationships": [

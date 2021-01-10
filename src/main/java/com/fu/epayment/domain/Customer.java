@@ -50,6 +50,10 @@ public class Customer implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<PaymentInfo> accounts = new HashSet<>();
 
+    @OneToMany(mappedBy = "customer")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    private Set<Transaction> transactions = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -196,6 +200,31 @@ public class Customer implements Serializable {
 
     public void setAccounts(Set<PaymentInfo> paymentInfos) {
         this.accounts = paymentInfos;
+    }
+
+    public Set<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public Customer transactions(Set<Transaction> transactions) {
+        this.transactions = transactions;
+        return this;
+    }
+
+    public Customer addTransactions(Transaction transaction) {
+        this.transactions.add(transaction);
+        transaction.setCustomer(this);
+        return this;
+    }
+
+    public Customer removeTransactions(Transaction transaction) {
+        this.transactions.remove(transaction);
+        transaction.setCustomer(null);
+        return this;
+    }
+
+    public void setTransactions(Set<Transaction> transactions) {
+        this.transactions = transactions;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

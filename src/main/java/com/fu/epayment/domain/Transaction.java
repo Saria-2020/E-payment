@@ -45,6 +45,10 @@ public class Transaction implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties(value = "transactions", allowSetters = true)
+    private Customer customer;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "transactions", allowSetters = true)
     private PaymentInfo paymentInfo;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -132,6 +136,19 @@ public class Transaction implements Serializable {
 
     public void setInvoice(Invoice invoice) {
         this.invoice = invoice;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public Transaction customer(Customer customer) {
+        this.customer = customer;
+        return this;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public PaymentInfo getPaymentInfo() {

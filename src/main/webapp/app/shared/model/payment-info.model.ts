@@ -6,6 +6,7 @@ export interface IPaymentInfo {
   name?: string;
   accountNumber?: string;
   cardNumber?: string;
+  balance?: number;
   transactions?: ITransaction[];
   customer?: ICustomer;
 }
@@ -16,6 +17,7 @@ export class PaymentInfo implements IPaymentInfo {
     public name?: string,
     public accountNumber?: string,
     public cardNumber?: string,
+    public balance?: number,
     public transactions?: ITransaction[],
     public customer?: ICustomer
   ) {}

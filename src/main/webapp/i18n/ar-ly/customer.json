@@ -22,7 +22,8 @@
       "invoices": "Invoices",
       "activityInformation": "Activity Information",
       "geographicalData": "Geographical Data",
-      "accounts": "Accounts"
+      "accounts": "Accounts",
+      "transactions": "Transactions"
     }
   }
 }

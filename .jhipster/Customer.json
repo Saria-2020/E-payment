@@ -43,6 +43,12 @@
       "otherEntityName": "paymentInfo",
       "otherEntityRelationshipName": "customer",
       "relationshipName": "accounts"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "transaction",
+      "otherEntityRelationshipName": "customer",
+      "relationshipName": "transactions"
     }
   ],
   "changelogDate": "20201123220149",

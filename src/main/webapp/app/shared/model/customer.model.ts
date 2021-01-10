@@ -3,6 +3,7 @@ import { IInvoice } from 'app/shared/model/invoice.model';
 import { IActivityInformation } from 'app/shared/model/activity-information.model';
 import { IGeographicalData } from 'app/shared/model/geographical-data.model';
 import { IPaymentInfo } from 'app/shared/model/payment-info.model';
+import { ITransaction } from 'app/shared/model/transaction.model';
 
 export interface ICustomer {
   id?: number;
@@ -13,6 +14,7 @@ export interface ICustomer {
   activityInformations?: IActivityInformation[];
   geographicalData?: IGeographicalData[];
   accounts?: IPaymentInfo[];
+  transactions?: ITransaction[];
 }
 
 export class Customer implements ICustomer {
@@ -24,6 +26,7 @@ export class Customer implements ICustomer {
     public invoices?: IInvoice[],
     public activityInformations?: IActivityInformation[],
     public geographicalData?: IGeographicalData[],
-    public accounts?: IPaymentInfo[]
+    public accounts?: IPaymentInfo[],
+    public transactions?: ITransaction[]
   ) {}
 }

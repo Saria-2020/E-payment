@@ -40,6 +40,8 @@ public class CustomerCriteria implements Serializable, Criteria {
 
     private LongFilter accountsId;
 
+    private LongFilter transactionsId;
+
     public CustomerCriteria() {
     }
 
@@ -52,6 +54,7 @@ public class CustomerCriteria implements Serializable, Criteria {
         this.activityInformationId = other.activityInformationId == null ? null : other.activityInformationId.copy();
         this.geographicalDataId = other.geographicalDataId == null ? null : other.geographicalDataId.copy();
         this.accountsId = other.accountsId == null ? null : other.accountsId.copy();
+        this.transactionsId = other.transactionsId == null ? null : other.transactionsId.copy();
     }
 
     @Override
@@ -123,6 +126,14 @@ public class CustomerCriteria implements Serializable, Criteria {
         this.accountsId = accountsId;
     }
 
+    public LongFilter getTransactionsId() {
+        return transactionsId;
+    }
+
+    public void setTransactionsId(LongFilter transactionsId) {
+        this.transactionsId = transactionsId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -141,7 +152,8 @@ public class CustomerCriteria implements Serializable, Criteria {
             Objects.equals(invoicesId, that.invoicesId) &&
             Objects.equals(activityInformationId, that.activityInformationId) &&
             Objects.equals(geographicalDataId, that.geographicalDataId) &&
-            Objects.equals(accountsId, that.accountsId);
+            Objects.equals(accountsId, that.accountsId) &&
+            Objects.equals(transactionsId, that.transactionsId);
     }
 
     @Override
@@ -154,7 +166,8 @@ public class CustomerCriteria implements Serializable, Criteria {
         invoicesId,
         activityInformationId,
         geographicalDataId,
-        accountsId
+        accountsId,
+        transactionsId
         );
     }
 
@@ -170,6 +183,7 @@ public class CustomerCriteria implements Serializable, Criteria {
                 (activityInformationId != null ? "activityInformationId=" + activityInformationId + ", " : "") +
                 (geographicalDataId != null ? "geographicalDataId=" + geographicalDataId + ", " : "") +
                 (accountsId != null ? "accountsId=" + accountsId + ", " : "") +
+                (transactionsId != null ? "transactionsId=" + transactionsId + ", " : "") +
             "}";
     }
 

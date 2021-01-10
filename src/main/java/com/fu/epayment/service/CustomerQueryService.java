@@ -111,6 +111,10 @@ public class CustomerQueryService extends QueryService<Customer> {
                 specification = specification.and(buildSpecification(criteria.getAccountsId(),
                     root -> root.join(Customer_.accounts, JoinType.LEFT).get(PaymentInfo_.id)));
             }
+            if (criteria.getTransactionsId() != null) {
+                specification = specification.and(buildSpecification(criteria.getTransactionsId(),
+                    root -> root.join(Customer_.transactions, JoinType.LEFT).get(Transaction_.id)));
+            }
         }
         return specification;
     }

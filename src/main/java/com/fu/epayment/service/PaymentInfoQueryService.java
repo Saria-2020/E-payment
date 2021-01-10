@@ -94,6 +94,9 @@ public class PaymentInfoQueryService extends QueryService<PaymentInfo> {
             if (criteria.getCardNumber() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getCardNumber(), PaymentInfo_.cardNumber));
             }
+            if (criteria.getBalance() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getBalance(), PaymentInfo_.balance));
+            }
             if (criteria.getTransactionsId() != null) {
                 specification = specification.and(buildSpecification(criteria.getTransactionsId(),
                     root -> root.join(PaymentInfo_.transactions, JoinType.LEFT).get(Transaction_.id)));

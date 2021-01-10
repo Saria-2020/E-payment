@@ -32,6 +32,8 @@ public class PaymentInfoCriteria implements Serializable, Criteria {
 
     private StringFilter cardNumber;
 
+    private DoubleFilter balance;
+
     private LongFilter transactionsId;
 
     private LongFilter customerId;
@@ -44,6 +46,7 @@ public class PaymentInfoCriteria implements Serializable, Criteria {
         this.name = other.name == null ? null : other.name.copy();
         this.accountNumber = other.accountNumber == null ? null : other.accountNumber.copy();
         this.cardNumber = other.cardNumber == null ? null : other.cardNumber.copy();
+        this.balance = other.balance == null ? null : other.balance.copy();
         this.transactionsId = other.transactionsId == null ? null : other.transactionsId.copy();
         this.customerId = other.customerId == null ? null : other.customerId.copy();
     }
@@ -85,6 +88,14 @@ public class PaymentInfoCriteria implements Serializable, Criteria {
         this.cardNumber = cardNumber;
     }
 
+    public DoubleFilter getBalance() {
+        return balance;
+    }
+
+    public void setBalance(DoubleFilter balance) {
+        this.balance = balance;
+    }
+
     public LongFilter getTransactionsId() {
         return transactionsId;
     }
@@ -116,6 +127,7 @@ public class PaymentInfoCriteria implements Serializable, Criteria {
             Objects.equals(name, that.name) &&
             Objects.equals(accountNumber, that.accountNumber) &&
             Objects.equals(cardNumber, that.cardNumber) &&
+            Objects.equals(balance, that.balance) &&
             Objects.equals(transactionsId, that.transactionsId) &&
             Objects.equals(customerId, that.customerId);
     }
@@ -127,6 +139,7 @@ public class PaymentInfoCriteria implements Serializable, Criteria {
         name,
         accountNumber,
         cardNumber,
+        balance,
         transactionsId,
         customerId
         );
@@ -140,6 +153,7 @@ public class PaymentInfoCriteria implements Serializable, Criteria {
                 (name != null ? "name=" + name + ", " : "") +
                 (accountNumber != null ? "accountNumber=" + accountNumber + ", " : "") +
                 (cardNumber != null ? "cardNumber=" + cardNumber + ", " : "") +
+                (balance != null ? "balance=" + balance + ", " : "") +
                 (transactionsId != null ? "transactionsId=" + transactionsId + ", " : "") +
                 (customerId != null ? "customerId=" + customerId + ", " : "") +
             "}";

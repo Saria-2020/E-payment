@@ -21,6 +21,7 @@
                     <th scope="col"  jhiSortBy="amount"><span jhiTranslate="ePaymentApp.transaction.amount">Amount</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="dateTime"><span jhiTranslate="ePaymentApp.transaction.dateTime">Date Time</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="paymentDetails"><span jhiTranslate="ePaymentApp.transaction.paymentDetails">Payment Details</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="customer.phoneNumber"><span jhiTranslate="ePaymentApp.transaction.customer">Customer</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="paymentInfo.name"><span jhiTranslate="ePaymentApp.transaction.paymentInfo">Payment Info</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
@@ -33,6 +34,11 @@
                     <td>{{ transaction.amount }}</td>
                     <td>{{ transaction.dateTime | date:'medium' }}</td>
                     <td>{{ transaction.paymentDetails }}</td>
+                    <td>
+                        <div *ngIf="transaction.customer">
+                            <a [routerLink]="['/customer', transaction.customer?.id, 'view']" >{{ transaction.customer?.phoneNumber }}</a>
+                        </div>
+                    </td>
                     <td>
                         <div *ngIf="transaction.paymentInfo">
                             <a [routerLink]="['/payment-info', transaction.paymentInfo?.id, 'view']" >{{ transaction.paymentInfo?.name }}</a>

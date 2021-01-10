@@ -22,6 +22,7 @@
       "dateTime": "Date Time",
       "paymentDetails": "Payment Details",
       "invoice": "Invoice",
+      "customer": "Customer",
       "paymentInfo": "Payment Info"
     }
   }

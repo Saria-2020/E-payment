@@ -9,8 +9,12 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { ITransaction, Transaction } from 'app/shared/model/transaction.model';
 import { TransactionService } from './transaction.service';
+import { ICustomer } from 'app/shared/model/customer.model';
+import { CustomerService } from 'app/entities/customer/customer.service';
 import { IPaymentInfo } from 'app/shared/model/payment-info.model';
 import { PaymentInfoService } from 'app/entities/payment-info/payment-info.service';
+
+type SelectableEntity = ICustomer | IPaymentInfo;
 
 @Component({
   selector: 'jhi-transaction-update',
@@ -18,6 +22,7 @@ import { PaymentInfoService } from 'app/entities/payment-info/payment-info.servi
 })
 export class TransactionUpdateComponent implements OnInit {
   isSaving = false;
+  customers: ICustomer[] = [];
   paymentinfos: IPaymentInfo[] = [];
 
   editForm = this.fb.group({
@@ -27,11 +32,13 @@ export class TransactionUpdateComponent implements OnInit {
     amount: [],
     dateTime: [],
     paymentDetails: [],
+    customer: [],
     paymentInfo: [],
   });
 
   constructor(
     protected transactionService: TransactionService,
+    protected customerService: CustomerService,
     protected paymentInfoService: PaymentInfoService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -46,6 +53,8 @@ export class TransactionUpdateComponent implements OnInit {
 
       this.updateForm(transaction);
 
+      this.customerService.query().subscribe((res: HttpResponse<ICustomer[]>) => (this.customers = res.body || []));
+
       this.paymentInfoService.query().subscribe((res: HttpResponse<IPaymentInfo[]>) => (this.paymentinfos = res.body || []));
     });
   }
@@ -58,6 +67,7 @@ export class TransactionUpdateComponent implements OnInit {
       amount: transaction.amount,
       dateTime: transaction.dateTime ? transaction.dateTime.format(DATE_TIME_FORMAT) : null,
       paymentDetails: transaction.paymentDetails,
+      customer: transaction.customer,
       paymentInfo: transaction.paymentInfo,
     });
   }
@@ -85,6 +95,7 @@ export class TransactionUpdateComponent implements OnInit {
       amount: this.editForm.get(['amount'])!.value,
       dateTime: this.editForm.get(['dateTime'])!.value ? moment(this.editForm.get(['dateTime'])!.value, DATE_TIME_FORMAT) : undefined,
       paymentDetails: this.editForm.get(['paymentDetails'])!.value,
+      customer: this.editForm.get(['customer'])!.value,
       paymentInfo: this.editForm.get(['paymentInfo'])!.value,
     };
   }
@@ -105,7 +116,7 @@ export class TransactionUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: IPaymentInfo): any {
+  trackById(index: number, item: SelectableEntity): any {
     return item.id;
   }
 }

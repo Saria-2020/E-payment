@@ -32,6 +32,13 @@
     },
     {
       "relationshipType": "many-to-one",
+      "otherEntityName": "customer",
+      "otherEntityRelationshipName": "transactions",
+      "relationshipName": "customer",
+      "otherEntityField": "phoneNumber"
+    },
+    {
+      "relationshipType": "many-to-one",
       "otherEntityName": "paymentInfo",
       "otherEntityRelationshipName": "transactions",
       "relationshipName": "paymentInfo",

@@ -31,6 +31,9 @@
             <column name="payment_details" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="customer_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <column name="payment_info_id" type="bigint">
                 <constraints nullable="true" />
             </column>

@@ -104,6 +104,10 @@ public class TransactionQueryService extends QueryService<Transaction> {
                 specification = specification.and(buildSpecification(criteria.getInvoiceId(),
                     root -> root.join(Transaction_.invoice, JoinType.LEFT).get(Invoice_.id)));
             }
+            if (criteria.getCustomerId() != null) {
+                specification = specification.and(buildSpecification(criteria.getCustomerId(),
+                    root -> root.join(Transaction_.customer, JoinType.LEFT).get(Customer_.id)));
+            }
             if (criteria.getPaymentInfoId() != null) {
                 specification = specification.and(buildSpecification(criteria.getPaymentInfoId(),
                     root -> root.join(Transaction_.paymentInfo, JoinType.LEFT).get(PaymentInfo_.id)));

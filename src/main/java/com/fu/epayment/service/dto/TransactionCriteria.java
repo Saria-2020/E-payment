@@ -39,6 +39,8 @@ public class TransactionCriteria implements Serializable, Criteria {
 
     private LongFilter invoiceId;
 
+    private LongFilter customerId;
+
     private LongFilter paymentInfoId;
 
     public TransactionCriteria() {
@@ -52,6 +54,7 @@ public class TransactionCriteria implements Serializable, Criteria {
         this.dateTime = other.dateTime == null ? null : other.dateTime.copy();
         this.paymentDetails = other.paymentDetails == null ? null : other.paymentDetails.copy();
         this.invoiceId = other.invoiceId == null ? null : other.invoiceId.copy();
+        this.customerId = other.customerId == null ? null : other.customerId.copy();
         this.paymentInfoId = other.paymentInfoId == null ? null : other.paymentInfoId.copy();
     }
 
@@ -116,6 +119,14 @@ public class TransactionCriteria implements Serializable, Criteria {
         this.invoiceId = invoiceId;
     }
 
+    public LongFilter getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(LongFilter customerId) {
+        this.customerId = customerId;
+    }
+
     public LongFilter getPaymentInfoId() {
         return paymentInfoId;
     }
@@ -142,6 +153,7 @@ public class TransactionCriteria implements Serializable, Criteria {
             Objects.equals(dateTime, that.dateTime) &&
             Objects.equals(paymentDetails, that.paymentDetails) &&
             Objects.equals(invoiceId, that.invoiceId) &&
+            Objects.equals(customerId, that.customerId) &&
             Objects.equals(paymentInfoId, that.paymentInfoId);
     }
 
@@ -155,6 +167,7 @@ public class TransactionCriteria implements Serializable, Criteria {
         dateTime,
         paymentDetails,
         invoiceId,
+        customerId,
         paymentInfoId
         );
     }
@@ -170,6 +183,7 @@ public class TransactionCriteria implements Serializable, Criteria {
                 (dateTime != null ? "dateTime=" + dateTime + ", " : "") +
                 (paymentDetails != null ? "paymentDetails=" + paymentDetails + ", " : "") +
                 (invoiceId != null ? "invoiceId=" + invoiceId + ", " : "") +
+                (customerId != null ? "customerId=" + customerId + ", " : "") +
                 (paymentInfoId != null ? "paymentInfoId=" + paymentInfoId + ", " : "") +
             "}";
     }

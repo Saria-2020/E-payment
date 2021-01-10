@@ -23,6 +23,7 @@ export class PaymentInfoUpdateComponent implements OnInit {
     name: [],
     accountNumber: [],
     cardNumber: [],
+    balance: [],
     customer: [],
   });
 
@@ -47,6 +48,7 @@ export class PaymentInfoUpdateComponent implements OnInit {
       name: paymentInfo.name,
       accountNumber: paymentInfo.accountNumber,
       cardNumber: paymentInfo.cardNumber,
+      balance: paymentInfo.balance,
       customer: paymentInfo.customer,
     });
   }
@@ -72,6 +74,7 @@ export class PaymentInfoUpdateComponent implements OnInit {
       name: this.editForm.get(['name'])!.value,
       accountNumber: this.editForm.get(['accountNumber'])!.value,
       cardNumber: this.editForm.get(['cardNumber'])!.value,
+      balance: this.editForm.get(['balance'])!.value,
       customer: this.editForm.get(['customer'])!.value,
     };
   }

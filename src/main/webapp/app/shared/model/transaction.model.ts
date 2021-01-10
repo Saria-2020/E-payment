@@ -1,5 +1,6 @@
 import { Moment } from 'moment';
 import { IInvoice } from 'app/shared/model/invoice.model';
+import { ICustomer } from 'app/shared/model/customer.model';
 import { IPaymentInfo } from 'app/shared/model/payment-info.model';
 
 export interface ITransaction {
@@ -10,6 +11,7 @@ export interface ITransaction {
   dateTime?: Moment;
   paymentDetails?: string;
   invoice?: IInvoice;
+  customer?: ICustomer;
   paymentInfo?: IPaymentInfo;
 }
 
@@ -22,6 +24,7 @@ export class Transaction implements ITransaction {
     public dateTime?: Moment,
     public paymentDetails?: string,
     public invoice?: IInvoice,
+    public customer?: ICustomer,
     public paymentInfo?: IPaymentInfo
   ) {}
 }

@@ -20,6 +20,10 @@
                 <dd>
                     <span>{{ paymentInfo.cardNumber }}</span>
                 </dd>
+                <dt><span jhiTranslate="ePaymentApp.paymentInfo.balance">Balance</span></dt>
+                <dd>
+                    <span>{{ paymentInfo.balance }}</span>
+                </dd>
                 <dt><span jhiTranslate="ePaymentApp.paymentInfo.customer">Customer</span></dt>
                 <dd>
                     <div *ngIf="paymentInfo.customer">

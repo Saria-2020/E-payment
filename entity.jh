@@ -59,6 +59,7 @@ entity GeographicalData {
  	name String,
     accountNumber String,
  	cardNumber String,
+ 	balance Double
     // Customer
  }
 
@@ -81,6 +82,7 @@ relationship OneToMany {
     Customer{activityInformation(name)} to ActivityInformation{customer(phoneNumber)}
     Customer{GeographicalData(realEstateNumber)} to GeographicalData{customer(phoneNumber)}
     Customer{accounts(name)} to PaymentInfo{customer(phoneNumber)}
+    Customer{transactions(name)} to Transaction{customer(phoneNumber)}
 
     Invoice{items(name)} to InvoiceItem{invoice(invoiceNumber)}
 
