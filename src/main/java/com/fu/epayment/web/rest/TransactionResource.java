@@ -1,6 +1,10 @@
 package com.fu.epayment.web.rest;
 
+import com.fu.epayment.domain.Invoice;
+import com.fu.epayment.domain.PaymentInfo;
 import com.fu.epayment.domain.Transaction;
+import com.fu.epayment.service.InvoiceService;
+import com.fu.epayment.service.PaymentInfoService;
 import com.fu.epayment.service.TransactionService;
 import com.fu.epayment.web.rest.errors.BadRequestAlertException;
 import com.fu.epayment.service.dto.TransactionCriteria;
@@ -22,8 +26,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.StreamSupport;
 
 /**
@@ -44,9 +50,15 @@ public class TransactionResource {
 
     private final TransactionQueryService transactionQueryService;
 
-    public TransactionResource(TransactionService transactionService, TransactionQueryService transactionQueryService) {
+    private final InvoiceService invoiceService;
+
+    private final PaymentInfoService paymentInfoService;
+
+    public TransactionResource(TransactionService transactionService, TransactionQueryService transactionQueryService, InvoiceService invoiceService, PaymentInfoService paymentInfoService) {
         this.transactionService = transactionService;
         this.transactionQueryService = transactionQueryService;
+        this.invoiceService = invoiceService;
+        this.paymentInfoService = paymentInfoService;
     }
 
     /**
@@ -64,6 +76,38 @@ public class TransactionResource {
         }
         Transaction result = transactionService.save(transaction);
         return ResponseEntity.created(new URI("/api/transactions/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
+    @PostMapping("/make-payment")
+    public ResponseEntity<Transaction> makePayment(@RequestBody PaymentInfo paymentInfo, Invoice invoice) throws URISyntaxException {
+        if (invoice.getTotalAmount() != null && paymentInfo.getBalance() !=null){
+            paymentInfo.setBalance(paymentInfo.getBalance() - invoice.getTotalAmount());
+
+            if (invoice.getTotalAmount() > paymentInfo.getBalance()){
+                throw new BadRequestAlertException("You don't have enough balance to make transaction", ENTITY_NAME, "idexists");
+            }
+        }
+
+        invoice.setPaid(true);
+
+        invoiceService.save(invoice);
+
+
+        paymentInfoService.save(paymentInfo);
+
+        Transaction transaction = new Transaction();
+        transaction.setCustomer(invoice.getCustomer());
+        transaction.setAmount(invoice.getTotalAmount());
+        transaction.setDateTime(ZonedDateTime.now().toInstant());
+        transaction.setInvoice(invoice);
+        transaction.setUuid(UUID.randomUUID().toString());
+        transaction.setPaymentDetails(invoice.getVerificationNumber());
+        transaction.setPaymentInfo(paymentInfo);
+
+        Transaction result=transactionService.save(transaction);
+        return ResponseEntity.created(new URI("/api/make-payment/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
