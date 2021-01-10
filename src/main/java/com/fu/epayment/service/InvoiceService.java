@@ -1,6 +1,7 @@
 package com.fu.epayment.service;
 
 import com.fu.epayment.domain.Invoice;
+import com.fu.epayment.domain.InvoiceItem;
 import com.fu.epayment.repository.InvoiceRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 /**
@@ -23,8 +25,11 @@ public class InvoiceService {
 
     private final InvoiceRepository invoiceRepository;
 
-    public InvoiceService(InvoiceRepository invoiceRepository) {
+    private final InvoiceItemService invoiceItemService;
+
+    public InvoiceService(InvoiceRepository invoiceRepository, InvoiceItemService invoiceItemService) {
         this.invoiceRepository = invoiceRepository;
+        this.invoiceItemService = invoiceItemService;
     }
 
     /**
@@ -35,7 +40,15 @@ public class InvoiceService {
      */
     public Invoice save(Invoice invoice) {
         log.debug("Request to save Invoice : {}", invoice);
-        return invoiceRepository.save(invoice);
+        Double totalAmount = invoice.getItems().stream().mapToDouble(InvoiceItem::getAmount).sum();
+        invoice.setTotalAmount(totalAmount);
+        invoice = invoiceRepository.save(invoice);
+
+        Invoice finalInvoice = invoice;
+        invoice.getItems().forEach(item -> item.setInvoice(finalInvoice));
+        invoiceItemService.saveAll(new ArrayList<>(invoice.getItems()));
+
+        return invoice;
     }
 
     /**

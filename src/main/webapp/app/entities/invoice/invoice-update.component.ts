@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -14,6 +14,7 @@ import { ITransaction } from 'app/shared/model/transaction.model';
 import { TransactionService } from 'app/entities/transaction/transaction.service';
 import { ICustomer } from 'app/shared/model/customer.model';
 import { CustomerService } from 'app/entities/customer/customer.service';
+import { IInvoiceItem } from 'app/shared/model/invoice-item.model';
 
 type SelectableEntity = ITransaction | ICustomer;
 
@@ -37,6 +38,7 @@ export class InvoiceUpdateComponent implements OnInit {
     paid: [],
     transaction: [],
     customer: [],
+    items: new FormArray([]),
   });
 
   constructor(
@@ -82,6 +84,23 @@ export class InvoiceUpdateComponent implements OnInit {
     });
   }
 
+  get items(): any {
+    return this.editForm.get('items') as any;
+  }
+
+  addItem(): void {
+    const group = new FormGroup({
+      name: new FormControl(''),
+      amount: new FormControl(''),
+    });
+
+    this.items.push(group);
+  }
+
+  removeItem(): void {
+    this.items.removeAt(this.items.length - 1);
+  }
+
   updateForm(invoice: IInvoice): void {
     this.editForm.patchValue({
       id: invoice.id,
@@ -89,9 +108,7 @@ export class InvoiceUpdateComponent implements OnInit {
       date: invoice.date ? invoice.date.format(DATE_TIME_FORMAT) : null,
       verificationNumber: invoice.verificationNumber,
       unitName: invoice.unitName,
-      totalAmount: invoice.totalAmount,
       amountPaid: invoice.amountPaid,
-      paid: invoice.paid,
       transaction: invoice.transaction,
       customer: invoice.customer,
     });
@@ -112,6 +129,8 @@ export class InvoiceUpdateComponent implements OnInit {
   }
 
   private createFromForm(): IInvoice {
+    const itemArray: IInvoiceItem[] = this.items.value;
+
     return {
       ...new Invoice(),
       id: this.editForm.get(['id'])!.value,
@@ -121,9 +140,10 @@ export class InvoiceUpdateComponent implements OnInit {
       unitName: this.editForm.get(['unitName'])!.value,
       totalAmount: this.editForm.get(['totalAmount'])!.value,
       amountPaid: this.editForm.get(['amountPaid'])!.value,
-      paid: this.editForm.get(['paid'])!.value,
+      paid: false,
       transaction: this.editForm.get(['transaction'])!.value,
       customer: this.editForm.get(['customer'])!.value,
+      items: itemArray,
     };
   }
 

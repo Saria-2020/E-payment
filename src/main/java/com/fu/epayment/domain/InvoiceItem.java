@@ -1,5 +1,6 @@
 package com.fu.epayment.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -29,7 +30,7 @@ public class InvoiceItem implements Serializable {
     private Double amount;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = "items", allowSetters = true)
+    @JsonIgnore
     private Invoice invoice;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

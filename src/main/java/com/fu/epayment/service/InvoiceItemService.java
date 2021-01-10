@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -36,6 +38,11 @@ public class InvoiceItemService {
     public InvoiceItem save(InvoiceItem invoiceItem) {
         log.debug("Request to save InvoiceItem : {}", invoiceItem);
         return invoiceItemRepository.save(invoiceItem);
+    }
+
+    public List<InvoiceItem> saveAll(ArrayList<InvoiceItem> invoiceItems) {
+        log.debug("Request to save all InvoiceItem");
+        return invoiceItemRepository.saveAll(invoiceItems);
     }
 
     /**

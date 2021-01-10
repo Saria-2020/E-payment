@@ -55,12 +55,23 @@
                     class="btn btn-info">
                 <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
             </button>
+        </div>
 
-            <button type="button"
-                    [routerLink]="['/invoice', invoice.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-            </button>
+        <div class="table-responsive" id="entities" *ngIf="invoiceItems && invoiceItems.length > 0">
+            <table class="table table-striped" aria-describedby="page-heading">
+                <thead>
+                    <tr>
+                        <th scope="col"><span jhiTranslate="ePaymentApp.invoiceItem.name">Name</span></th>
+                        <th scope="col"><span jhiTranslate="ePaymentApp.invoiceItem.amount">Amount</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let invoiceItem of invoiceItems;">
+                        <td>{{ invoiceItem.name }}</td>
+                        <td>{{ invoiceItem.amount }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

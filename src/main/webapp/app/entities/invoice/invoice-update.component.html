@@ -37,37 +37,35 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ePaymentApp.invoice.totalAmount" for="field_totalAmount">Total Amount</label>
-                    <input type="number" class="form-control" name="totalAmount" id="field_totalAmount"
-                           formControlName="totalAmount"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ePaymentApp.invoice.amountPaid" for="field_amountPaid">Amount Paid</label>
-                    <input type="number" class="form-control" name="amountPaid" id="field_amountPaid"
-                           formControlName="amountPaid"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ePaymentApp.invoice.paid" for="field_paid">Paid</label>
-                    <input type="checkbox" class="form-control" name="paid" id="field_paid"
-                           formControlName="paid"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="ePaymentApp.invoice.transaction" for="field_transaction">Transaction</label>
-                    <select class="form-control" id="field_transaction" name="transaction" formControlName="transaction">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="transactionOption.id === editForm.get('transaction')!.value?.id ? editForm.get('transaction')!.value : transactionOption" *ngFor="let transactionOption of transactions; trackBy: trackById">{{ transactionOption.name }}</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="ePaymentApp.invoice.customer" for="field_customer">Customer</label>
                     <select class="form-control" id="field_customer" name="customer" formControlName="customer">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="customerOption.id === editForm.get('customer')!.value?.id ? editForm.get('customer')!.value : customerOption" *ngFor="let customerOption of customers; trackBy: trackById">{{ customerOption.phoneNumber }}</option>
                     </select>
+                </div>
+
+                <div class="form-group" formArrayName="items">
+                    <div class="row">
+                        <div class="col-6">
+                            <button class="btn btn-primary" type="button" (click)="addItem();">Add Item </button>
+                        </div>
+                        <div class="col-6">
+                            <button class="btn btn-danger" type="button" (click)="removeItem();">Remove Item </button>
+                        </div>
+                    </div>
+
+                    <div *ngFor="let item of items.controls;">
+                        <div class="row" [formGroup]="item">
+                            <div class="col-6">
+                                <label class="form-control-label">Name</label>
+                                <input type="text" class="form-control" formControlName="name" />
+                            </div>
+                            <div class="col-6">
+                                <label class="form-control-label">Amount</label>
+                                <input type="number" min="1" class="form-control" formControlName="amount" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
