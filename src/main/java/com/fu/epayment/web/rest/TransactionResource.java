@@ -6,6 +6,7 @@ import com.fu.epayment.domain.Transaction;
 import com.fu.epayment.service.InvoiceService;
 import com.fu.epayment.service.PaymentInfoService;
 import com.fu.epayment.service.TransactionService;
+import com.fu.epayment.service.dto.TransactionDTO;
 import com.fu.epayment.web.rest.errors.BadRequestAlertException;
 import com.fu.epayment.service.dto.TransactionCriteria;
 import com.fu.epayment.service.TransactionQueryService;
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.ZonedDateTime;
@@ -81,35 +83,42 @@ public class TransactionResource {
     }
 
     @PostMapping("/make-payment")
-    public ResponseEntity<Transaction> makePayment(@RequestBody PaymentInfo paymentInfo, Invoice invoice) throws URISyntaxException {
-        if (invoice.getTotalAmount() != null && paymentInfo.getBalance() !=null){
-            paymentInfo.setBalance(paymentInfo.getBalance() - invoice.getTotalAmount());
+    public ResponseEntity<Transaction> makePayment(@RequestBody TransactionDTO transactionDTO) throws URISyntaxException {
 
-            if (invoice.getTotalAmount() > paymentInfo.getBalance()){
-                throw new BadRequestAlertException("You don't have enough balance to make transaction", ENTITY_NAME, "idexists");
+        if (transactionDTO.getInvoice().getTotalAmount() != null && transactionDTO.getPaymentInfo().getBalance() != null){
+            double credit;;
+
+            if (transactionDTO.getInvoice().getTotalAmount() > transactionDTO.getPaymentInfo().getBalance()){
+                throw new BadRequestAlertException("You don't have enough balance to make transaction", ENTITY_NAME, "noEnough");
             }
+            credit =transactionDTO.getPaymentInfo().getBalance() - transactionDTO.getInvoice().getTotalAmount();
+            transactionDTO.getPaymentInfo().setBalance(credit);
+
         }
+        paymentInfoService.save(transactionDTO.getPaymentInfo());
 
-        invoice.setPaid(true);
-
-        invoiceService.save(invoice);
-
-
-        paymentInfoService.save(paymentInfo);
-
+        transactionDTO.getInvoice().setPaid(true);
+        transactionDTO.getInvoice().setAmountPaid(transactionDTO.getInvoice().getTotalAmount());
         Transaction transaction = new Transaction();
-        transaction.setCustomer(invoice.getCustomer());
-        transaction.setAmount(invoice.getTotalAmount());
+        transaction.setCustomer(transactionDTO.getInvoice().getCustomer());
+        transaction.setAmount(transactionDTO.getInvoice().getTotalAmount());
         transaction.setDateTime(ZonedDateTime.now().toInstant());
-        transaction.setInvoice(invoice);
+        transaction.setInvoice(transactionDTO.getInvoice());
         transaction.setUuid(UUID.randomUUID().toString());
-        transaction.setPaymentDetails(invoice.getVerificationNumber());
-        transaction.setPaymentInfo(paymentInfo);
+        transaction.setPaymentDetails(transactionDTO.getInvoice().getVerificationNumber());
+        transaction.setPaymentInfo(transactionDTO.getPaymentInfo());
+
 
         Transaction result=transactionService.save(transaction);
+        transactionDTO.getInvoice().setTransaction(result);
+        System.out.println("************  "+ transactionDTO.getInvoice().getTransaction()+"  ******************");
+        invoiceService.update(transactionDTO.getInvoice());
+
+
         return ResponseEntity.created(new URI("/api/make-payment/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
+//        return null;
     }
 
     /**

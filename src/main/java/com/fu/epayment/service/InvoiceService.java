@@ -51,6 +51,11 @@ public class InvoiceService {
         return invoice;
     }
 
+    public Invoice update(Invoice invoice){
+        log.debug("Request to save Invoice : {}", invoice);
+        return invoiceRepository.save(invoice);
+    }
+
     /**
      * Get all the invoices.
      *
